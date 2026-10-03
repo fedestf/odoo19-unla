@@ -3,4 +3,7 @@
     <record id="group_estate_property_manager" model="res.groups">
         <field name="name">Manager de Propiedades</field>
     </record>
+    <record id="group_estate_property_salesman" model="res.groups">
+        <field name="name">Vendedor de Propiedades</field>
+    </record>
 </odoo>
