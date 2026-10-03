@@ -118,7 +118,7 @@ El superusuario es un modo privilegiado, no un cuarto tipo de usuario.
 
 ## Punto 10 — Permiso de lectura
 
-Estado: código preparado; actualización y prueba sin superusuario pendientes.
+Estado: validado. Tras descargar el CSV y actualizar el módulo se abrió la lista con el usuario habitual, sin botón New.
 
 Archivo: security/ir.model.access.csv, incluido en data del manifest antes de vistas y menús.
 
@@ -136,3 +136,33 @@ Para dar todos los permisos en esta regla, los cuatro valores serían 1. En esta
 Los permisos de acceso se suman: un 0 no revoca permisos concedidos por otra regla o grupo. El superusuario evita estas comprobaciones. Por eso la validación debe hacerse con un usuario interno habitual, fuera del modo superusuario.
 
 Resultado esperado: menú y lista visibles; creación, modificación y eliminación no permitidas, salvo que existan otras reglas que las concedan. Si la tabla está vacía, ver la lista confirma el acceso, pero todavía no demuestra lectura de un registro existente.
+
+## Punto 11 — Grupo creado desde la interfaz
+
+Estado: validado por el estudiante, quien confirmó creación, modificación y eliminación de una propiedad de prueba con su usuario habitual.
+
+En Odoo 19, se accedió por Ajustes > Usuarios y compañías > Grupos. Se creó Manager de Propiedades, se asignó el usuario y se agregó en Access Rights una regla sobre Propiedad con lectura, escritura, creación y eliminación habilitadas.
+
+Los permisos son aditivos: la regla de solo lectura del grupo interno no impide que Manager conceda los demás permisos.
+
+La configuración manual vive en la base y no se incluye automáticamente en Git.
+
+## Punto 12 — Grupo definido en el módulo
+
+Estado: código preparado; validación en Odoo pendiente.
+
+security/real_estate_res_groups.xml define un registro res.groups con ID group_estate_property_manager y nombre Manager de Propiedades. El manifest lo carga antes del CSV de permisos.
+
+ID externo completo: real_estate.group_estate_property_manager. Odoo usa ese identificador para actualizar el mismo registro al recargar el XML; no identifica registros por el nombre visible.
+
+El grupo manual del punto 11 no se fusiona automáticamente con el grupo XML. Para distinguirlos, renombrar el grupo manual a Manager de Propiedades (manual - punto 11), conservando de momento sus usuarios y permisos. El grupo del módulo se mantendrá con el nombre solicitado. En el punto 14 se definirán los permisos del grupo XML y se podrá completar el reemplazo de la configuración manual.
+
+Este punto define solo el grupo; todavía no añade sus permisos ni asigna usuarios en código.
+
+### Interfaz frente a código
+
+Interfaz: permite probar rápidamente sin programar; el cambio queda en esa base, es fácil olvidar documentarlo y no se reproduce con git pull o una instalación nueva.
+
+Código: deja historial y revisión en Git, facilita reproducir la configuración al instalar el módulo y referenciarla por ID externo; exige respetar sintaxis y orden de carga, y actualizar el módulo para aplicarlo.
+
+Una actualización puede sobrescribir campos definidos en XML, según las opciones de carga. Las asignaciones de usuarios se gestionan en la base salvo que se incluyan expresamente en los datos del módulo.
