@@ -149,7 +149,7 @@ La configuración manual vive en la base y no se incluye automáticamente en Git
 
 ## Punto 12 — Grupo definido en el módulo
 
-Estado: código preparado; validación en Odoo pendiente.
+Estado: validado mediante captura de ambos grupos: Manager de Propiedades del módulo y Manager de propiedades (manual).
 
 security/real_estate_res_groups.xml define un registro res.groups con ID group_estate_property_manager y nombre Manager de Propiedades. El manifest lo carga antes del CSV de permisos.
 
@@ -166,3 +166,13 @@ Interfaz: permite probar rápidamente sin programar; el cambio queda en esa base
 Código: deja historial y revisión en Git, facilita reproducir la configuración al instalar el módulo y referenciarla por ID externo; exige respetar sintaxis y orden de carga, y actualizar el módulo para aplicarlo.
 
 Una actualización puede sobrescribir campos definidos en XML, según las opciones de carga. Las asignaciones de usuarios se gestionan en la base salvo que se incluyan expresamente en los datos del módulo.
+
+## Punto 13 — Grupo Vendedor de Propiedades
+
+Estado: código preparado; actualización y comprobación en Odoo pendientes.
+
+Se agregó al mismo real_estate_res_groups.xml un registro res.groups con nombre Vendedor de Propiedades e ID externo real_estate.group_estate_property_salesman.
+
+El manifest ya carga este XML; no requiere una segunda entrada. Este punto crea solo el grupo. Los permisos de lectura del vendedor y los permisos completos del manager se definirán en el punto 14.
+
+Validación: descargar los cambios, actualizar Inmobiliaria y buscar Vendedor de Propiedades en Ajustes > Usuarios y compañías > Grupos. No asignar permisos manuales al nuevo grupo para esta consigna.
