@@ -5,7 +5,9 @@
     "author": "Federico-UNLA",
     "license": "LGPL-3",
     "depends": ["base"],
-    "data": [],
+    "data": [
+        "views/estate_property_views.xml",
+    ],
     "application": True,
     "installable": True,
 }
