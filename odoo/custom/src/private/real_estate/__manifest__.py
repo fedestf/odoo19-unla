@@ -7,6 +7,7 @@
     "depends": ["base"],
     "data": [
         "views/estate_property_views.xml",
+        "views/real_estate_menuitem.xml",
     ],
     "application": True,
     "installable": True,
