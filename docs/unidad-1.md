@@ -68,7 +68,7 @@ Para inspeccionar: modo desarrollador > Ajustes > Técnico > Acciones > Acciones
 
 ## Punto 6 — Menús
 
-Estado: código preparado; actualización y validación en Odoo pendientes.
+Estado: validado al abrir Inmobiliaria > Anuncios > Propiedades como superusuario.
 
 Archivo: views/real_estate_menuitem.xml.
 
@@ -88,4 +88,51 @@ Aún no se definieron permisos para estate.property. La falta de acceso puede oc
 
 ## Registro de validación
 
-Los puntos 1 a 5 se comprobaron con las salidas y capturas de la práctica. El punto 6 requiere actualizar el módulo y comprobar los registros de menú. Este archivo se ampliará a medida que se resuelvan las siguientes consignas.
+Los puntos 1 a 5 se comprobaron con las salidas y capturas de la práctica. Los puntos 6 y 7 se comprobaron mediante la lista Propiedades abierta como superusuario. Este archivo se ampliará a medida que se resuelvan las siguientes consignas.
+
+## Punto 7 — Superusuario
+
+Estado: validado. El modo superusuario evita restricciones de acceso y permitió ver la lista vacía de Propiedades. No asigna permisos permanentes al usuario. Para volver al usuario habitual, cerrar sesión y volver a ingresar.
+
+## Punto 8 — Modos de vista
+
+Estado: pruebas realizadas; el estudiante confirmó la restauración de list,form.
+
+- list: abre una lista de registros.
+- form: abre un formulario; sin registro indicado, un registro nuevo.
+- list,form: abre primero la lista y ofrece formulario.
+
+Se cambió view_mode desde la interfaz. Esos cambios se guardan en la base, no en Git. Actualizar el módulo vuelve a cargar el valor del XML.
+
+Durante la prueba, el navegador continuó mostrando la lista a pesar de que la configuración decía form. Tras reiniciar el servicio y entrar desde el menú se observó un formulario; no se determinó con certeza la causa de la persistencia anterior. El parámetro view_type sugerido inicialmente no resolvió el caso. Se desactivó Data Caching temporalmente y luego se indicó restaurarlo.
+
+El formulario generado automáticamente mostró bedrooms=2 y orientación Norte. Guardar sin Título produjo Missing required fields, coherente con required=True.
+
+## Punto 9 — Tipos de usuario
+
+Interno: trabaja en el backend según sus grupos; base.group_user.
+Portal: accede a información autorizada desde el portal; base.group_portal.
+Público: representa visitantes sin autenticación; base.group_public.
+
+El superusuario es un modo privilegiado, no un cuarto tipo de usuario.
+
+## Punto 10 — Permiso de lectura
+
+Estado: código preparado; actualización y prueba sin superusuario pendientes.
+
+Archivo: security/ir.model.access.csv, incluido en data del manifest antes de vistas y menús.
+
+La regla access_estate_property_user usa model_estate_property para referenciar el modelo y base.group_user para usuarios internos.
+
+| Permiso | Valor |
+| --- | --- |
+| perm_read | 1 |
+| perm_write | 0 |
+| perm_create | 0 |
+| perm_unlink | 0 |
+
+Para dar todos los permisos en esta regla, los cuatro valores serían 1. En esta consigna se conserva solo lectura.
+
+Los permisos de acceso se suman: un 0 no revoca permisos concedidos por otra regla o grupo. El superusuario evita estas comprobaciones. Por eso la validación debe hacerse con un usuario interno habitual, fuera del modo superusuario.
+
+Resultado esperado: menú y lista visibles; creación, modificación y eliminación no permitidas, salvo que existan otras reglas que las concedan. Si la tabla está vacía, ver la lista confirma el acceso, pero todavía no demuestra lectura de un registro existente.
