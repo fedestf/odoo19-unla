@@ -205,3 +205,15 @@ Tras actualizar el módulo, el estudiante confirmó que pudo crear, modificar y 
 Para Vendedor se comprobó la pertenencia del usuario al grupo y una regla de solo lectura. Hubo inicialmente un error de acceso y un aviso de página desactualizada; después de renovar la página y la sesión, se pudo abrir la lista sin New. No se atribuye el error a una causa única confirmada.
 
 La última captura muestra una lista vacía. Confirma acceso a la acción/lista y ausencia del control de creación, pero no demuestra lectura de un registro existente ni un intento denegado de modificación o eliminación. Estas comprobaciones quedan pendientes para completar la evidencia de solo lectura.
+
+## Punto 15 — Usuario sin Vendedor ni Manager
+
+Estado: validado mediante captura de Access Error después de la prueba de retirar las pertenencias.
+
+Un usuario habitual sin grupos que otorguen acceso a estate.property no puede leer sus registros. El menú puede ocultarse; abrir la acción directamente produce Access Error.
+
+La captura enumera Manager de Propiedades, Manager de propiedades (manual) y Vendedor de Propiedades como grupos que permiten la operación. La regla del grupo manual sigue existiendo en la base aunque se haya retirado al usuario de ese grupo.
+
+Los permisos de acceso son aditivos: cualquier otra regla aplicable podría conceder acceso. El modo superusuario evita estas restricciones y no sirve para esta prueba.
+
+Después de validar, volver a asignar al usuario el Manager de Propiedades definido por el módulo, cerrar sesión y volver a ingresar para continuar. Esta restauración queda pendiente de confirmación.
