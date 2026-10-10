@@ -356,3 +356,13 @@ Para validar: actualizar real_estate, recargar y abrir Anuncios → Propiedades 
 La captura muestra la lista personalizada con siete registros y las siete columnas solicitadas: Título, Código Postal, Habitaciones, Superficie cubierta, Precio esperado, Precio de venta y Fecha disponibilidad. Algunos encabezados se abrevian por el ancho disponible de la ventana. Se ven valores de los registros, incluidas las copias con precio de venta 0.00 y las fechas predeterminadas del 10/01/2027.
 
 Estado: vista de lista validada visualmente en Odoo. La captura no verifica por sí sola navegación al formulario ni ejecución de búsquedas o agrupaciones.
+
+## Punto 23 — Formulario personalizado
+
+Estado: XML y estructura verificados; validación visual en Odoo pendiente.
+
+Se agrega estate_property_form_view, registro de ir.ui.view para estate.property, en estate_property_views.xml. El header contiene state con widget statusbar. El título name se presenta en h1 con placeholder Nombre propiedad. En sheet, un group exterior contiene dos grupos: código postal y fecha de disponibilidad a la izquierda, precios esperado y de venta a la derecha.
+
+El notebook tiene dos páginas: Descripción, con description, bedrooms, living_area, facades y garage; y Jardín, con garden, garden_area y garden_orientation. La vista incluye los catorce campos del modelo una vez cada uno. La acción sigue con list,form y la vista de búsqueda existente se conserva.
+
+Para validar: actualizar el módulo, abrir una propiedad desde la lista y comprobar título, columnas y barra de estado. Visitar ambas pestañas; abrir una propiedad nueva para comprobar placeholder y valores predeterminados. Guardar una edición y volver a abrirla para comprobar persistencia. La barra presenta el estado; los botones de transición se implementarán cuando la guía los solicite.
