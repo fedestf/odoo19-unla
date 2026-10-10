@@ -418,3 +418,13 @@ Este punto define el modelo. Los permisos se agregan en el punto 26, la acción 
 La captura de Ajustes → Modelos muestra estate.property.type con descripción Tipo de propiedad, tipo Base Object y sin marcar Transient Model. Se confirma el registro del modelo persistente en Odoo tras actualizar el módulo. La captura no muestra aún el detalle del campo name ni la tabla en pgweb; su definición obligatoria fue verificada en el código.
 
 Estado: punto 25 validado mediante el registro del modelo en Odoo.
+
+## Punto 26 — Permisos de tipos de propiedad
+
+Estado: CSV y combinaciones de permisos verificados; carga en Odoo pendiente.
+
+Se agregan dos ACL para model_estate_property_type: access_estate_property_type_manager asignada a group_estate_property_manager con lectura, escritura, creación y borrado (1,1,1,1); y access_estate_property_type_salesman asignada a group_estate_property_salesman con solo lectura (1,0,0,0). Las ACL del modelo estate.property se conservan.
+
+Para comprobar la carga, actualizar el módulo y consultar Ajustes → Técnico → Seguridad → Derechos de acceso (Access Rights). Buscar estate.property.type; deben aparecer ambas reglas y sus permisos. La prueba de operaciones desde el menú se realizará cuando los puntos siguientes incorporen la acción y el menú.
+
+Los permisos de grupos se suman: para probar lectura exclusiva del Vendedor, el usuario no debe pertenecer también al Manager ni a otro grupo que le conceda escritura sobre este modelo. Evitar modo superusuario para validar restricciones.
