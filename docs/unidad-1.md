@@ -306,3 +306,13 @@ copy=False no vuelve un campo de solo lectura ni impide completar el valor manua
 El estudiante confirmó la nueva duplicación. La captura de Casa Banfield muestra fecha de disponibilidad vacía y precio de venta 0.00, mientras conserva código postal 1828, tres habitaciones y orientación Norte. Esto coincide con el resultado esperado tras aplicar copy=False. La captura de la copia no permite comprobar por sí sola que el original permanece intacto.
 
 Estado: duplicación validada por la confirmación del estudiante y los valores visibles de la nueva copia.
+
+## Punto 20 — Fecha de disponibilidad predeterminada
+
+Estado: código preparado; sintaxis y cálculo de meses calendario verificados. Validación en Odoo pendiente.
+
+El campo date_availability conserva copy=False y agrega default=lambda self: fields.Date.add(fields.Date.context_today(self), months=3). La función se evalúa al solicitar el valor predeterminado, usando la fecha según el contexto del usuario. Se suman tres meses calendario, no 90 días; por ejemplo, 10/10/2026 produce 10/01/2027. Los días inexistentes se ajustan al último día del mes.
+
+Los registros existentes mantienen su fecha. Para validar, actualizar el módulo y abrir una propiedad nueva: debe traer la fecha de hoy más tres meses, editable por el usuario.
+
+Al duplicar, copy=False sigue evitando copiar la fecha original, pero ahora la nueva copia recibe el valor predeterminado de hoy más tres meses. El precio de venta sigue en 0.00. La fecha vacía validada en el punto 19 correspondía al modelo sin este default.
