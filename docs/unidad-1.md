@@ -366,3 +366,9 @@ Se agrega estate_property_form_view, registro de ir.ui.view para estate.property
 El notebook tiene dos páginas: Descripción, con description, bedrooms, living_area, facades y garage; y Jardín, con garden, garden_area y garden_orientation. La vista incluye los catorce campos del modelo una vez cada uno. La acción sigue con list,form y la vista de búsqueda existente se conserva.
 
 Para validar: actualizar el módulo, abrir una propiedad desde la lista y comprobar título, columnas y barra de estado. Visitar ambas pestañas; abrir una propiedad nueva para comprobar placeholder y valores predeterminados. Guardar una edición y volver a abrirla para comprobar persistencia. La barra presenta el estado; los botones de transición se implementarán cuando la guía los solicite.
+
+### Validación visual del punto 23
+
+Las dos capturas de una propiedad guardada muestran el formulario personalizado: título destacado, código postal y fecha a la izquierda, precios a la derecha, y barra de estado con Oferta recibida resaltado. La pestaña Descripción muestra descripción, habitaciones, superficie cubierta, fachadas y garage; la pestaña Jardín muestra jardín, superficie de jardín y orientación.
+
+Estado: estructura y ambas pestañas validadas visualmente en Odoo. Las capturas no prueban todavía el placeholder del formulario nuevo ni una edición guardada desde esta vista.
