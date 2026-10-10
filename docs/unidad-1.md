@@ -288,3 +288,15 @@ La nueva captura muestra Mes de creación: Month y October 2026 (3), con los tre
 El estudiante confirmó que guardó los valores y duplicó la propiedad, conservándose todo tal cual, siguiendo la indicación de completar fecha de disponibilidad y precio de venta. Esta confirmación valida el comportamiento anterior a copy=False; la captura aportada muestra la agrupación, no los valores del formulario.
 
 Conclusión: en el modelo actual, los campos normales de fecha de disponibilidad y precio de venta se copian al duplicar. El punto 19 modificará ambos para excluirlos de la copia. Los identificadores y la auditoría del nuevo registro no se consideran datos copiados del original.
+
+## Punto 19 — Campos que no se copian
+
+Estado: código preparado y sintaxis verificada; duplicación en Odoo pendiente.
+
+Se agrega copy=False a date_availability y selling_price en estate_property.py.
+
+Al duplicar por el ORM, estos campos no se toman del original. Sin valores por defecto personalizados, se espera fecha vacía y precio de venta 0. Los demás campos copiables mantienen sus valores. Los registros existentes, incluidas copias anteriores, no se modifican retroactivamente.
+
+Para validar: actualizar el módulo y duplicar nuevamente un original que tenga fecha y precio de venta distinto de cero. Comparar original y nueva copia, comprobando que el original permanece intacto.
+
+copy=False no vuelve un campo de solo lectura ni impide completar el valor manualmente. Impide copiar su valor automáticamente durante la duplicación estándar.
