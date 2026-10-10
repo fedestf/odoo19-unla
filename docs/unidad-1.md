@@ -402,3 +402,13 @@ Prueba pendiente: actualizar el módulo, abrir una propiedad de prueba guardada 
 La captura sin filtro de disponibilidad muestra Nuevo (5), Oferta recibida (1) y Vendido (1), con Casa Lanús en el grupo Vendido. Al activar Propiedades disponibles, permanecen Nuevo (5) y Oferta recibida (1), y desaparecen el grupo Vendido y su propiedad. Se confirma que el filtro incluye los dos estados disponibles y excluye una propiedad vendida. El cambio de estado también queda reflejado en la agrupación.
 
 Estado: punto 24 validado en Odoo, incluida la prueba de exclusión con un registro Vendido.
+
+## Punto 25 — Modelo de tipos de propiedad
+
+Estado: código e importación preparados; sintaxis, nombre técnico y campo obligatorio verificados. Actualización en Odoo pendiente.
+
+Se crea models/estate_property_type.py con la clase EstatePropertyType, _name="estate.property.type", _description="Tipo de propiedad" y name=fields.Char(string="Nombre", required=True). Se importa desde models/__init__.py para que Odoo registre el modelo al cargar el módulo.
+
+Al actualizar real_estate, el ORM debe registrar el modelo y crear la tabla estate_property_type con name y los campos automáticos. Para comprobarlo, en modo desarrollador consultar Ajustes → Técnico → Estructura de la base de datos → Modelos y buscar estate.property.type; otra opción es consultar la tabla en pgweb.
+
+Este punto define el modelo. Los permisos se agregan en el punto 26, la acción en el 27 y el menú en el 28. Hasta completar esos pasos no se espera un menú de tipos ni acceso para usuarios normales. Puede aparecer una advertencia sobre permisos de acceso ausentes durante la actualización.
