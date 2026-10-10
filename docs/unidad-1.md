@@ -396,3 +396,9 @@ Estado: agrupación y filtro validados visualmente con los estados permitidos; p
 A pedido del estudiante se habilita temporalmente la barra de estado mediante options="{'clickable': True}". El widget de Odoo 19 interpreta esta opción para permitir seleccionar un estado, actualizar el registro y guardarlo. Se respetan los permisos de escritura del usuario. Esto permite probar la exclusión de una propiedad Cancelada sin implementar aún botones de negocio.
 
 Prueba pendiente: actualizar el módulo, abrir una propiedad de prueba guardada como Manager, seleccionar Cancelado en la barra, volver a la lista y activar Propiedades disponibles. La propiedad debe desaparecer del resultado y reaparecer al quitar el filtro. Esta opción se revisará al implementar botones y reglas de transición.
+
+### Validación completa del punto 24
+
+La captura sin filtro de disponibilidad muestra Nuevo (5), Oferta recibida (1) y Vendido (1), con Casa Lanús en el grupo Vendido. Al activar Propiedades disponibles, permanecen Nuevo (5) y Oferta recibida (1), y desaparecen el grupo Vendido y su propiedad. Se confirma que el filtro incluye los dos estados disponibles y excluye una propiedad vendida. El cambio de estado también queda reflejado en la agrupación.
+
+Estado: punto 24 validado en Odoo, incluida la prueba de exclusión con un registro Vendido.
