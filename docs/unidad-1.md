@@ -342,3 +342,11 @@ Las tres capturas muestran: formulario nuevo con Estado Nuevo; propiedad origina
 Quedan comprobados el estado inicial y el reinicio del estado al duplicar por copy=False más default="new". La fecha coincide entre original y copia en esta prueba, por lo que estas capturas no distinguen por sí solas una fecha copiada de una calculada por defecto.
 
 Estado: punto 21 validado en Odoo.
+
+## Punto 22 — Vista de lista personalizada
+
+Estado: XML y siete columnas verificados; actualización y validación visual en Odoo pendientes.
+
+Se agrega estate_property_list_view como registro de ir.ui.view en estate_property_views.xml, vinculado al modelo estate.property. La arquitectura usa <list>, la etiqueta para esta versión de Odoo, y muestra en orden name, postcode, bedrooms, living_area, expected_price, selling_price y date_availability. Reemplaza la lista automática que solo mostraba el nombre. La acción existente conserva view_mode list,form; el archivo ya está declarado en el manifiesto.
+
+Para validar: actualizar real_estate, recargar y abrir Anuncios → Propiedades sin agrupaciones para comprobar las siete columnas. Abrir una fila debe seguir mostrando su formulario; buscar y agrupar deben seguir disponibles.
