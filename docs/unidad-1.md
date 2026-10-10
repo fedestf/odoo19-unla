@@ -350,3 +350,9 @@ Estado: XML y siete columnas verificados; actualización y validación visual en
 Se agrega estate_property_list_view como registro de ir.ui.view en estate_property_views.xml, vinculado al modelo estate.property. La arquitectura usa <list>, la etiqueta para esta versión de Odoo, y muestra en orden name, postcode, bedrooms, living_area, expected_price, selling_price y date_availability. Reemplaza la lista automática que solo mostraba el nombre. La acción existente conserva view_mode list,form; el archivo ya está declarado en el manifiesto.
 
 Para validar: actualizar real_estate, recargar y abrir Anuncios → Propiedades sin agrupaciones para comprobar las siete columnas. Abrir una fila debe seguir mostrando su formulario; buscar y agrupar deben seguir disponibles.
+
+### Validación del punto 22
+
+La captura muestra la lista personalizada con siete registros y las siete columnas solicitadas: Título, Código Postal, Habitaciones, Superficie cubierta, Precio esperado, Precio de venta y Fecha disponibilidad. Algunos encabezados se abrevian por el ancho disponible de la ventana. Se ven valores de los registros, incluidas las copias con precio de venta 0.00 y las fechas predeterminadas del 10/01/2027.
+
+Estado: vista de lista validada visualmente en Odoo. La captura no verifica por sí sola navegación al formulario ni ejecución de búsquedas o agrupaciones.
