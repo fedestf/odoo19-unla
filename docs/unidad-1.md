@@ -434,3 +434,13 @@ Los permisos de grupos se suman: para probar lectura exclusiva del Vendedor, el 
 La captura de Access Rights muestra estate.property.type.manager sobre Tipo de propiedad con lectura, escritura, creación y borrado marcados, y estate.property.type.salesman con únicamente lectura. Se ven también las dos ACL previas de Propiedad con sus permisos conservados.
 
 Estado: carga y configuración de las ACL del punto 26 validadas visualmente en Odoo. La prueba de operaciones con usuarios de cada grupo queda para cuando se disponga de la acción y el menú de tipos.
+
+## Punto 27 — Acción Tipos de propiedad
+
+Estado: XML, acción y orden de carga verificados; actualización en Odoo pendiente.
+
+Se crea views/estate_property_type_views.xml con la acción estate_property_type_action de tipo ir.actions.act_window: name Tipos de propiedad, res_model estate.property.type y view_mode list,form. Se declara el archivo en el manifiesto antes de real_estate_menuitem.xml para que una referencia posterior desde el menú encuentre la acción ya cargada.
+
+No se requieren vistas personalizadas en este punto: Odoo puede generar lista y formulario para el modelo. El menú corresponde al punto 28.
+
+Validación: actualizar real_estate y abrir la acción mediante /odoo/action-real_estate.estate_property_type_action, usando un usuario Manager. Debe aparecer Tipos de propiedad; crear un tipo de prueba como Casa y guardarlo comprueba apertura del formulario, campo Nombre y acceso de creación del Manager. La prueba de permisos completos y de Vendedor se completa con usuarios separados.
