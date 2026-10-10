@@ -573,3 +573,13 @@ Referencia para relaciones: [implementación oficial de campos relacionales de O
 La nueva captura muestra buyer_id con etiqueta Comprador y tipo many2one. Junto con la captura anterior de property_type_id y salesman_id, queda verificada la carga de las tres relaciones en Odoo. Los modelos relacionados fueron comprobados en el código; estas capturas muestran los nombres y tipos de campos.
 
 Estado: carga de campos del punto 29 validada. La prueba del vendedor predeterminado y al duplicar se realizará al incorporar los campos al formulario en el punto 30.
+
+## Punto 30 — Relaciones en el formulario
+
+Estado: XML, posición de los campos y tercera pestaña verificados; prueba visual y guardado pendientes.
+
+En el primer grupo del formulario se agrega property_type_id encima de postcode. Se añade una página Más info. al notebook existente con buyer_id y salesman_id. El modelo y los valores predeterminados se definieron en el punto 29; esta vista permite seleccionarlos y consultarlos.
+
+Para validar: actualizar real_estate y abrir una propiedad nueva como Manager. Elegir Casa en Tipo Propiedad, completar el título y revisar Más info.: Vendedor debe traer el usuario conectado. Seleccionar un contacto como Comprador, guardar y reabrir para comprobar persistencia de las relaciones. Para probar copy=False del vendedor, cambiarlo a otro usuario accesible, guardar y duplicar: la copia debe traer al usuario que realiza la duplicación. Duplicar sin cambiar el vendedor original no distingue copia de valor predeterminado si ambos usuarios coinciden.
+
+Apunte: un campo Many2one muestra el nombre del registro relacionado en el selector. Definirlo en Python establece la relación; incluirlo en XML permite usarlo en esta vista personalizada. Las páginas de un notebook organizan campos del mismo registro; no crean modelos ni tablas adicionales.
