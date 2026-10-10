@@ -444,3 +444,9 @@ Se crea views/estate_property_type_views.xml con la acción estate_property_type
 No se requieren vistas personalizadas en este punto: Odoo puede generar lista y formulario para el modelo. El menú corresponde al punto 28.
 
 Validación: actualizar real_estate y abrir la acción mediante /odoo/action-real_estate.estate_property_type_action, usando un usuario Manager. Debe aparecer Tipos de propiedad; crear un tipo de prueba como Casa y guardarlo comprueba apertura del formulario, campo Nombre y acceso de creación del Manager. La prueba de permisos completos y de Vendedor se completa con usuarios separados.
+
+### Validación del punto 27
+
+La captura muestra la acción Tipos de propiedad abierta, la columna Nombre y un registro Casa guardado (1-1 / 1). Se confirma la apertura de la acción y la creación del tipo de prueba siguiendo las instrucciones previas. El botón New está visible. La captura no verifica los permisos de modificación/borrado ni la restricción del Vendedor.
+
+Estado: punto 27 validado en Odoo mediante la acción y el tipo Casa guardado.
