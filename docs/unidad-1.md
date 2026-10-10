@@ -169,10 +169,31 @@ Una actualización puede sobrescribir campos definidos en XML, según las opcion
 
 ## Punto 13 — Grupo Vendedor de Propiedades
 
-Estado: código preparado; actualización y comprobación en Odoo pendientes.
+Estado: validado mediante captura de Vendedor de Propiedades en la lista de grupos.
 
 Se agregó al mismo real_estate_res_groups.xml un registro res.groups con nombre Vendedor de Propiedades e ID externo real_estate.group_estate_property_salesman.
 
 El manifest ya carga este XML; no requiere una segunda entrada. Este punto crea solo el grupo. Los permisos de lectura del vendedor y los permisos completos del manager se definirán en el punto 14.
 
 Validación: descargar los cambios, actualizar Inmobiliaria y buscar Vendedor de Propiedades en Ajustes > Usuarios y compañías > Grupos. No asignar permisos manuales al nuevo grupo para esta consigna.
+
+## Punto 14 — Permisos del Manager y del Vendedor
+
+Estado: CSV preparado; validación de ejecución pendiente.
+
+En security/ir.model.access.csv se conserva el ID access_estate_property_user de la regla del punto 10 y se cambia su group_id de base.group_user a real_estate.group_estate_property_salesman. Conservar el ID actualiza la misma regla; cambiarlo podría dejar activa la regla anterior.
+
+Se agrega access_estate_property_manager para real_estate.group_estate_property_manager.
+
+| Grupo | Leer | Escribir | Crear | Eliminar |
+| --- | --- | --- | --- | --- |
+| Vendedor de Propiedades | 1 | 0 | 0 | 0 |
+| Manager de Propiedades | 1 | 1 | 1 | 1 |
+
+Se comprobó la estructura de ocho columnas y las referencias contra los ID del XML de grupos. La ejecución se comprueba después de actualizar el módulo.
+
+Los permisos del grupo manual del punto 11 siguen en la base: Git no los elimina. Para validar el nuevo Manager, asignar al usuario el grupo del módulo y quitar su pertenencia al grupo manual, sin borrar el grupo ni sus reglas.
+
+Prueba Manager: crear, leer, modificar y eliminar una propiedad de prueba como usuario habitual. Prueba Vendedor: quitar temporalmente la pertenencia al Manager y asignar Vendedor; cerrar sesión y volver a ingresar; comprobar lectura y ausencia de creación. Tener ambos grupos concede los permisos del Manager porque los permisos son aditivos. Usar preferentemente un usuario de prueba para comparar roles.
+
+La respuesta sobre un usuario sin ninguno de los grupos corresponde al punto 15, y debe considerar otras reglas o grupos presentes en la base.
