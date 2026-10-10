@@ -334,3 +334,11 @@ El campo es obligatorio (required=True), inicia en Nuevo (default="new") y no co
 Validación: actualizar el módulo, recargar y abrir una propiedad nueva. En el formulario automático debe aparecer Estado en Nuevo. Guardar una propiedad con título, cambiar su estado y duplicarla para comprobar que la copia inicia en Nuevo. Si la vista automática no incorpora el campo, revisar la vista antes de continuar.
 
 Este punto define los valores del campo; los botones y las reglas de transición se implementarán cuando la guía los solicite.
+
+### Validación del punto 21
+
+Las tres capturas muestran: formulario nuevo con Estado Nuevo; propiedad original guardada con Estado Oferta recibida y precio de venta 11,111.00; y copia con Estado Nuevo y precio de venta 0.00. La copia conserva título, descripción, dos habitaciones y orientación Norte. Su fecha de disponibilidad es 10/01/2027, coherente con el valor predeterminado del punto 20.
+
+Quedan comprobados el estado inicial y el reinicio del estado al duplicar por copy=False más default="new". La fecha coincide entre original y copia en esta prueba, por lo que estas capturas no distinguen por sí solas una fecha copiada de una calculada por defecto.
+
+Estado: punto 21 validado en Odoo.
