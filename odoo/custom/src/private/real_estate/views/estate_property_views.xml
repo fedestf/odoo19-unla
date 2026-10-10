@@ -1,8 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="estate_property_search_view" model="ir.ui.view">
+        <field name="name">estate.property.search</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <search string="Buscar propiedades">
+                <field name="name"/>
+                <field name="postcode"/>
+                <field name="expected_price"/>
+                <field name="bedrooms"/>
+                <field name="living_area"/>
+                <field name="facades"/>
+                <filter
+                    name="my_properties"
+                    string="Mis propiedades"
+                    domain="[('create_uid', '=', uid)]"
+                />
+                <group>
+                    <filter
+                        name="group_by_creator"
+                        string="Creado por"
+                        context="{'group_by': 'create_uid'}"
+                    />
+                    <filter
+                        name="group_by_creation_month"
+                        string="Mes de creación"
+                        context="{'group_by': 'create_date:month'}"
+                    />
+                    <filter
+                        name="group_by_postcode"
+                        string="Código Postal"
+                        context="{'group_by': 'postcode'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
     <record id="estate_property_action" model="ir.actions.act_window">
         <field name="name">Propiedades</field>
         <field name="res_model">estate.property</field>
         <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="estate_property_search_view"/>
     </record>
 </odoo>
