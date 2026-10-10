@@ -591,3 +591,9 @@ La captura del formulario nuevo muestra Tipo Propiedad Casa encima del código p
 El encabezado todavía muestra New y el icono de guardar, por lo que esta captura no verifica persistencia. Pendiente: guardar y reabrir para comprobar las relaciones; para validar copy=False del vendedor, duplicar un original cuyo vendedor difiera del usuario que realiza la copia.
 
 Estado: presentación de campos del punto 30 validada visualmente; prueba de guardado y duplicación pendiente.
+
+### Validación de guardado del punto 30
+
+La nueva captura muestra la propiedad guardada, con su título en el encabezado y posición 8 / 8. Conserva Tipo Propiedad Casa, Comprador Acme Corporation, Addison Olson y Vendedor Mitchell Admin en Más info. Se confirma el guardado de las relaciones siguiendo la indicación de guardar y reabrir.
+
+Estado: vista y guardado del punto 30 validados. La prueba específica de copy=False del vendedor con un original asignado a otro usuario continúa pendiente; no se infiere de esta captura.
