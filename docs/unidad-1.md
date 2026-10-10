@@ -458,3 +458,9 @@ Estado: XML, jerarquía y referencia a la acción verificados; validación en Od
 En real_estate_menuitem.xml se agrega Ajustes (real_estate_menu_settings) como hijo del menú raíz Inmobiliaria, con secuencia 20, después de Anuncios. Debajo se agrega Tipos de propiedad (real_estate_menu_property_types), vinculado a estate_property_type_action. El manifiesto ya carga la acción antes del archivo de menús.
 
 Validación: actualizar real_estate, recargar el navegador, entrar a Inmobiliaria → Ajustes → Tipos de propiedad y comprobar que se abre la lista con Casa. Si la navegación sigue mostrando menús antiguos, volver a entrar a la aplicación tras recargar; la guía también contempla actualizar desde Apps si persiste el problema.
+
+### Validación del punto 28
+
+La captura muestra Inmobiliaria con los menús Anuncios y Ajustes. El desplegable de Ajustes incluye Tipos de propiedad, y la acción abierta muestra la lista con el registro Casa (1-1 / 1). Quedan comprobados la jerarquía del menú y su conexión con la acción del punto 27.
+
+Estado: punto 28 validado visualmente en Odoo.
