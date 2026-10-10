@@ -428,3 +428,9 @@ Se agregan dos ACL para model_estate_property_type: access_estate_property_type_
 Para comprobar la carga, actualizar el módulo y consultar Ajustes → Técnico → Seguridad → Derechos de acceso (Access Rights). Buscar estate.property.type; deben aparecer ambas reglas y sus permisos. La prueba de operaciones desde el menú se realizará cuando los puntos siguientes incorporen la acción y el menú.
 
 Los permisos de grupos se suman: para probar lectura exclusiva del Vendedor, el usuario no debe pertenecer también al Manager ni a otro grupo que le conceda escritura sobre este modelo. Evitar modo superusuario para validar restricciones.
+
+### Validación de carga del punto 26
+
+La captura de Access Rights muestra estate.property.type.manager sobre Tipo de propiedad con lectura, escritura, creación y borrado marcados, y estate.property.type.salesman con únicamente lectura. Se ven también las dos ACL previas de Propiedad con sus permisos conservados.
+
+Estado: carga y configuración de las ACL del punto 26 validadas visualmente en Odoo. La prueba de operaciones con usuarios de cada grupo queda para cuando se disponga de la acción y el menú de tipos.
