@@ -179,7 +179,7 @@ Validación: descargar los cambios, actualizar Inmobiliaria y buscar Vendedor de
 
 ## Punto 14 — Permisos del Manager y del Vendedor
 
-Estado: CSV preparado; validación de ejecución pendiente.
+Estado: Manager validado para creación, modificación y eliminación según confirmación del estudiante. Vendedor validado para acceso a la lista, sin botón New; falta observar lectura de un registro existente y probar rechazo de escritura/eliminación.
 
 En security/ir.model.access.csv se conserva el ID access_estate_property_user de la regla del punto 10 y se cambia su group_id de base.group_user a real_estate.group_estate_property_salesman. Conservar el ID actualiza la misma regla; cambiarlo podría dejar activa la regla anterior.
 
@@ -197,3 +197,11 @@ Los permisos del grupo manual del punto 11 siguen en la base: Git no los elimina
 Prueba Manager: crear, leer, modificar y eliminar una propiedad de prueba como usuario habitual. Prueba Vendedor: quitar temporalmente la pertenencia al Manager y asignar Vendedor; cerrar sesión y volver a ingresar; comprobar lectura y ausencia de creación. Tener ambos grupos concede los permisos del Manager porque los permisos son aditivos. Usar preferentemente un usuario de prueba para comparar roles.
 
 La respuesta sobre un usuario sin ninguno de los grupos corresponde al punto 15, y debe considerar otras reglas o grupos presentes en la base.
+
+### Resultado observado del punto 14
+
+Tras actualizar el módulo, el estudiante confirmó que pudo crear, modificar y eliminar con el Manager del módulo. Reiniciar sin actualizar el módulo no había cargado los permisos nuevos.
+
+Para Vendedor se comprobó la pertenencia del usuario al grupo y una regla de solo lectura. Hubo inicialmente un error de acceso y un aviso de página desactualizada; después de renovar la página y la sesión, se pudo abrir la lista sin New. No se atribuye el error a una causa única confirmada.
+
+La última captura muestra una lista vacía. Confirma acceso a la acción/lista y ausencia del control de creación, pero no demuestra lectura de un registro existente ni un intento denegado de modificación o eliminación. Estas comprobaciones quedan pendientes para completar la evidencia de solo lectura.
