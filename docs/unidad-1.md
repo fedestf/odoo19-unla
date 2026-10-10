@@ -450,3 +450,11 @@ Validación: actualizar real_estate y abrir la acción mediante /odoo/action-rea
 La captura muestra la acción Tipos de propiedad abierta, la columna Nombre y un registro Casa guardado (1-1 / 1). Se confirma la apertura de la acción y la creación del tipo de prueba siguiendo las instrucciones previas. El botón New está visible. La captura no verifica los permisos de modificación/borrado ni la restricción del Vendedor.
 
 Estado: punto 27 validado en Odoo mediante la acción y el tipo Casa guardado.
+
+## Punto 28 — Menús de tipos de propiedad
+
+Estado: XML, jerarquía y referencia a la acción verificados; validación en Odoo pendiente.
+
+En real_estate_menuitem.xml se agrega Ajustes (real_estate_menu_settings) como hijo del menú raíz Inmobiliaria, con secuencia 20, después de Anuncios. Debajo se agrega Tipos de propiedad (real_estate_menu_property_types), vinculado a estate_property_type_action. El manifiesto ya carga la acción antes del archivo de menús.
+
+Validación: actualizar real_estate, recargar el navegador, entrar a Inmobiliaria → Ajustes → Tipos de propiedad y comprobar que se abre la lista con Casa. Si la navegación sigue mostrando menús antiguos, volver a entrar a la aplicación tras recargar; la guía también contempla actualizar desde Apps si persiste el problema.
