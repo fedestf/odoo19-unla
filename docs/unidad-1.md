@@ -316,3 +316,9 @@ El campo date_availability conserva copy=False y agrega default=lambda self: fie
 Los registros existentes mantienen su fecha. Para validar, actualizar el módulo y abrir una propiedad nueva: debe traer la fecha de hoy más tres meses, editable por el usuario.
 
 Al duplicar, copy=False sigue evitando copiar la fecha original, pero ahora la nueva copia recibe el valor predeterminado de hoy más tres meses. El precio de venta sigue en 0.00. La fecha vacía validada en el punto 19 correspondía al modelo sin este default.
+
+### Validación del punto 20
+
+La captura del formulario New muestra Fecha disponibilidad Jan 10, 2027 (10/01/2027), resultado esperado de sumar tres meses al 10/10/2026. Queda validada la carga automática del valor predeterminado al abrir una propiedad nueva. El registro aún no está guardado en la captura.
+
+Estado: valor predeterminado validado en Odoo.
