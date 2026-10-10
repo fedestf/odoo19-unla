@@ -390,3 +390,9 @@ La primera captura muestra agrupación por Estado: Nuevo (6) y Oferta recibida (
 Como todas las propiedades de esta prueba están en estados disponibles, el resultado no cambia al activar el filtro. Para comprobar exclusión de otros estados se requiere un registro en Oferta aceptada, Vendido o Cancelado; esa exclusión no está demostrada por estas capturas.
 
 Estado: agrupación y filtro validados visualmente con los estados permitidos; prueba de exclusión de otros estados pendiente.
+
+### Cambio manual de estado para probar exclusión
+
+A pedido del estudiante se habilita temporalmente la barra de estado mediante options="{'clickable': True}". El widget de Odoo 19 interpreta esta opción para permitir seleccionar un estado, actualizar el registro y guardarlo. Se respetan los permisos de escritura del usuario. Esto permite probar la exclusión de una propiedad Cancelada sin implementar aún botones de negocio.
+
+Prueba pendiente: actualizar el módulo, abrir una propiedad de prueba guardada como Manager, seleccionar Cancelado en la barra, volver a la lista y activar Propiedades disponibles. La propiedad debe desaparecer del resultado y reaparecer al quitar el filtro. Esta opción se revisará al implementar botones y reglas de transición.
