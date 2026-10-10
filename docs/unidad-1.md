@@ -583,3 +583,11 @@ En el primer grupo del formulario se agrega property_type_id encima de postcode.
 Para validar: actualizar real_estate y abrir una propiedad nueva como Manager. Elegir Casa en Tipo Propiedad, completar el título y revisar Más info.: Vendedor debe traer el usuario conectado. Seleccionar un contacto como Comprador, guardar y reabrir para comprobar persistencia de las relaciones. Para probar copy=False del vendedor, cambiarlo a otro usuario accesible, guardar y duplicar: la copia debe traer al usuario que realiza la duplicación. Duplicar sin cambiar el vendedor original no distingue copia de valor predeterminado si ambos usuarios coinciden.
 
 Apunte: un campo Many2one muestra el nombre del registro relacionado en el selector. Definirlo en Python establece la relación; incluirlo en XML permite usarlo en esta vista personalizada. Las páginas de un notebook organizan campos del mismo registro; no crean modelos ni tablas adicionales.
+
+### Comprobación visual del punto 30
+
+La captura del formulario nuevo muestra Tipo Propiedad Casa encima del código postal, y la pestaña Más info. con Comprador Acme Corporation, Addison Olson y Vendedor Mitchell Admin. Se confirma la ubicación y presentación de los tres campos; el vendedor visible coincide con el usuario esperado en esta prueba.
+
+El encabezado todavía muestra New y el icono de guardar, por lo que esta captura no verifica persistencia. Pendiente: guardar y reabrir para comprobar las relaciones; para validar copy=False del vendedor, duplicar un original cuyo vendedor difiera del usuario que realiza la copia.
+
+Estado: presentación de campos del punto 30 validada visualmente; prueba de guardado y duplicación pendiente.
