@@ -280,3 +280,11 @@ La lista pasó a tres registros, con dos llamados Casa Lanús. El formulario del
 Duplicar crea un registro independiente. El ID y los campos automáticos de creación se generan para el nuevo registro; los campos copiables conservan los valores del original.
 
 La captura muestra date_availability vacío y selling_price=0.00. Esos valores no permiten distinguir si fueron copiados o reinicializados. Antes del punto 19, completar fecha y precio de venta en el original y duplicarlo permite comparar el comportamiento con y sin copy=False.
+
+### Confirmación de agrupación mensual y punto 18
+
+La nueva captura muestra Mes de creación: Month y October 2026 (3), con los tres registros. Queda comprobada la agrupación mensual.
+
+El estudiante confirmó que guardó los valores y duplicó la propiedad, conservándose todo tal cual, siguiendo la indicación de completar fecha de disponibilidad y precio de venta. Esta confirmación valida el comportamiento anterior a copy=False; la captura aportada muestra la agrupación, no los valores del formulario.
+
+Conclusión: en el modelo actual, los campos normales de fecha de disponibilidad y precio de venta se copian al duplicar. El punto 19 modificará ambos para excluirlos de la copia. Los identificadores y la auditoría del nuevo registro no se consideran datos copiados del original.
