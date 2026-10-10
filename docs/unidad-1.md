@@ -322,3 +322,15 @@ Al duplicar, copy=False sigue evitando copiar la fecha original, pero ahora la n
 La captura del formulario New muestra Fecha disponibilidad Jan 10, 2027 (10/01/2027), resultado esperado de sumar tres meses al 10/10/2026. Queda validada la carga automática del valor predeterminado al abrir una propiedad nueva. El registro aún no está guardado en la captura.
 
 Estado: valor predeterminado validado en Odoo.
+
+## Punto 21 — Estado de la propiedad
+
+Estado: código preparado; sintaxis y definición verificadas. Actualización y prueba en Odoo pendientes.
+
+Se agrega state como fields.Selection con cinco opciones: new (Nuevo), offer_received (Oferta recibida), offer_accepted (Oferta aceptada), sold (Vendido) y canceled (Cancelado). Los identificadores se almacenan en la base; las etiquetas se muestran al usuario.
+
+El campo es obligatorio (required=True), inicia en Nuevo (default="new") y no copia el estado original al duplicar (copy=False). La copia recibe el valor predeterminado Nuevo.
+
+Validación: actualizar el módulo, recargar y abrir una propiedad nueva. En el formulario automático debe aparecer Estado en Nuevo. Guardar una propiedad con título, cambiar su estado y duplicarla para comprobar que la copia inicia en Nuevo. Si la vista automática no incorpora el campo, revisar la vista antes de continuar.
+
+Este punto define los valores del campo; los botones y las reglas de transición se implementarán cuando la guía los solicite.
