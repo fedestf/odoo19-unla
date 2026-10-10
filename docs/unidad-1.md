@@ -220,7 +220,7 @@ Después de validar, volver a asignar al usuario el Manager de Propiedades defin
 
 ## Punto 16 — Categoría Inmobiliaria (adaptación a Odoo 19)
 
-Estado: código preparado; actualización y validación pendientes.
+Estado: validado mediante captura de Groups: Manager y Vendedor muestran Inmobiliaria en la columna Privilege; el grupo manual permanece sin privilegio.
 
 En Odoo 19, los grupos se vinculan mediante privilege_id a res.groups.privilege. El privilegio tiene category_id que apunta a ir.module.category. Por eso el XML define:
 
