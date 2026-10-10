@@ -607,3 +607,9 @@ Se crea models/estate_property_tag.py con EstatePropertyTag, _name="estate.prope
 Validación: actualizar real_estate y buscar estate.property.tag en Ajustes → Técnico → Estructura de la base de datos → Modelos. Debe aparecer con descripción Etiqueta de propiedad. Los permisos, la acción, el menú y la relación con propiedades se incorporarán cuando sus puntos lo soliciten; aún no se espera un menú de etiquetas. Puede aparecer una advertencia de permisos ausentes durante la actualización.
 
 Apunte de estudio: _name identifica técnicamente el modelo; _description lo describe para usuarios y metadatos; el campo name contiene el nombre de cada registro de etiqueta. Definir el modelo de etiquetas no crea por sí solo una relación Many2many con propiedades.
+
+### Validación del punto 31
+
+La captura de Modelos muestra estate.property.tag con descripción Etiqueta de propiedad, tipo Base Object y Transient Model desmarcado. Se confirma que Odoo registró el modelo persistente tras la actualización. La definición de name como Char obligatorio se verificó en el código; no aparece en esta captura de la lista de modelos.
+
+Estado: punto 31 validado mediante el registro del modelo en Odoo.
