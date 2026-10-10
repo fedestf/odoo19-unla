@@ -382,3 +382,11 @@ La vista search agrega el filtro Propiedades disponibles con dominio [('state', 
 Un separator distingue el filtro de disponibilidad de Mis propiedades: si se activan ambos se combinan por AND, para mostrar propiedades propias que además estén disponibles.
 
 Validación: actualizar el módulo, abrir el menú de búsqueda, activar Propiedades disponibles y luego agrupar por Estado. Deben aparecer únicamente grupos Nuevo y Oferta recibida que contengan registros. Quitar el filtro de disponibilidad debe permitir ver los demás estados si existen registros. Un filtro modifica la búsqueda, no concede permisos de acceso.
+
+### Validación visual del punto 24
+
+La primera captura muestra agrupación por Estado: Nuevo (6) y Oferta recibida (1). La segunda muestra además el filtro Propiedades disponibles activo, conservando esos siete registros. Quedan comprobadas la agrupación y la activación del filtro con registros en ambos estados permitidos.
+
+Como todas las propiedades de esta prueba están en estados disponibles, el resultado no cambia al activar el filtro. Para comprobar exclusión de otros estados se requiere un registro en Oferta aceptada, Vendido o Cancelado; esa exclusión no está demostrada por estas capturas.
+
+Estado: agrupación y filtro validados visualmente con los estados permitidos; prueba de exclusión de otros estados pendiente.
