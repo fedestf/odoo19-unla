@@ -217,3 +217,21 @@ La captura enumera Manager de Propiedades, Manager de propiedades (manual) y Ven
 Los permisos de acceso son aditivos: cualquier otra regla aplicable podría conceder acceso. El modo superusuario evita estas restricciones y no sirve para esta prueba.
 
 Después de validar, volver a asignar al usuario el Manager de Propiedades definido por el módulo, cerrar sesión y volver a ingresar para continuar. Esta restauración queda pendiente de confirmación.
+
+## Punto 16 — Categoría Inmobiliaria (adaptación a Odoo 19)
+
+Estado: código preparado; actualización y validación pendientes.
+
+En Odoo 19, los grupos se vinculan mediante privilege_id a res.groups.privilege. El privilegio tiene category_id que apunta a ir.module.category. Por eso el XML define:
+
+1. module_category_real_estate: categoría Inmobiliaria.
+2. privilege_real_estate: privilegio Inmobiliaria, vinculado a esa categoría.
+3. Manager y Vendedor: vinculados al privilegio mediante privilege_id.
+
+El orden permite resolver las referencias antes de usarlas. Se mantienen los ID externos de los grupos existentes, sus permisos y sus asignaciones de usuarios. El grupo manual no se vincula a esta categoría.
+
+La organización facilita encontrar los grupos. No concede permisos ni hace que Manager herede Vendedor: no se agregan implied_ids.
+
+Para validar, actualizar el módulo y abrir Ajustes > Usuarios y compañías > Grupos. La columna Privilege debe mostrar Inmobiliaria para ambos grupos. En cada formulario, Privilege debe tener ese valor. Buscar el nombre del privilegio o agrupar por él permite ubicarlos juntos.
+
+Fuente técnica: código oficial Odoo 19, res_groups.py y res_groups_privilege.py.
