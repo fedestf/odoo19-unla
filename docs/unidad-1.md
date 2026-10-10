@@ -235,3 +235,23 @@ La organización facilita encontrar los grupos. No concede permisos ni hace que 
 Para validar, actualizar el módulo y abrir Ajustes > Usuarios y compañías > Grupos. La columna Privilege debe mostrar Inmobiliaria para ambos grupos. En cada formulario, Privilege debe tener ese valor. Buscar el nombre del privilegio o agrupar por él permite ubicarlos juntos.
 
 Fuente técnica: código oficial Odoo 19, res_groups.py y res_groups_privilege.py.
+
+## Punto 17 — Vista de búsqueda
+
+Estado: código preparado y XML comprobado; ejecución pendiente de validar.
+
+En estate_property_views.xml se crea estate_property_search_view de ir.ui.view, vinculada a estate.property. La acción la referencia expresamente mediante search_view_id.
+
+Campos de búsqueda: name, postcode, expected_price, bedrooms, living_area y facades.
+
+Filtro Mis propiedades: dominio [('create_uid', '=', uid)]. create_uid es el creador; uid representa al usuario actual. No se filtra por vendedor asignado, porque la consigna pide registros creados por el usuario.
+
+Agrupaciones: create_uid (Creado por), create_date:month (Mes de creación) y postcode (Código Postal). Se interpreta mes como mes de creación, usando la fecha automática de auditoría.
+
+Un dominio selecciona registros; group_by organiza los resultados sin modificar los datos. La vista search configura el buscador, no las columnas de la lista.
+
+Para validar: actualizar el módulo, abrir Propiedades y desplegar el buscador. Deben aparecer Mis propiedades y las tres agrupaciones. Al escribir un texto o número en el buscador, elegir el campo por el que se desea buscar.
+
+Crear propiedades de prueba con distintos códigos postales y valores permite comprobar resultados. Para crear, el usuario debe pertenecer al Manager del módulo. La aparición de controles no demuestra por sí sola el comportamiento del filtrado con datos.
+
+No se cambian permisos ni se crea aún una vista de lista o formulario personalizada.
