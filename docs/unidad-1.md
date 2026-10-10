@@ -597,3 +597,13 @@ Estado: presentación de campos del punto 30 validada visualmente; prueba de gua
 La nueva captura muestra la propiedad guardada, con su título en el encabezado y posición 8 / 8. Conserva Tipo Propiedad Casa, Comprador Acme Corporation, Addison Olson y Vendedor Mitchell Admin en Más info. Se confirma el guardado de las relaciones siguiendo la indicación de guardar y reabrir.
 
 Estado: vista y guardado del punto 30 validados. La prueba específica de copy=False del vendedor con un original asignado a otro usuario continúa pendiente; no se infiere de esta captura.
+
+## Punto 31 — Modelo de etiquetas de propiedad
+
+Estado: sintaxis, nombre técnico, descripción y campo obligatorio verificados; registro en Odoo pendiente.
+
+Se crea models/estate_property_tag.py con EstatePropertyTag, _name="estate.property.tag", _description="Etiqueta de propiedad" y name=fields.Char(string="Nombre", required=True). Se agrega su importación en models/__init__.py. Los modelos estate.property y estate.property.type ya tienen las descripciones Propiedad y Tipo de propiedad solicitadas por la nota de la consigna.
+
+Validación: actualizar real_estate y buscar estate.property.tag en Ajustes → Técnico → Estructura de la base de datos → Modelos. Debe aparecer con descripción Etiqueta de propiedad. Los permisos, la acción, el menú y la relación con propiedades se incorporarán cuando sus puntos lo soliciten; aún no se espera un menú de etiquetas. Puede aparecer una advertencia de permisos ausentes durante la actualización.
+
+Apunte de estudio: _name identifica técnicamente el modelo; _description lo describe para usuarios y metadatos; el campo name contiene el nombre de cada registro de etiqueta. Definir el modelo de etiquetas no crea por sí solo una relación Many2many con propiedades.
