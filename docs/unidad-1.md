@@ -412,3 +412,9 @@ Se crea models/estate_property_type.py con la clase EstatePropertyType, _name="e
 Al actualizar real_estate, el ORM debe registrar el modelo y crear la tabla estate_property_type con name y los campos automáticos. Para comprobarlo, en modo desarrollador consultar Ajustes → Técnico → Estructura de la base de datos → Modelos y buscar estate.property.type; otra opción es consultar la tabla en pgweb.
 
 Este punto define el modelo. Los permisos se agregan en el punto 26, la acción en el 27 y el menú en el 28. Hasta completar esos pasos no se espera un menú de tipos ni acceso para usuarios normales. Puede aparecer una advertencia sobre permisos de acceso ausentes durante la actualización.
+
+### Validación del punto 25
+
+La captura de Ajustes → Modelos muestra estate.property.type con descripción Tipo de propiedad, tipo Base Object y sin marcar Transient Model. Se confirma el registro del modelo persistente en Odoo tras actualizar el módulo. La captura no muestra aún el detalle del campo name ni la tabla en pgweb; su definición obligatoria fue verificada en el código.
+
+Estado: punto 25 validado mediante el registro del modelo en Odoo.
