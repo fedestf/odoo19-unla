@@ -300,3 +300,9 @@ Al duplicar por el ORM, estos campos no se toman del original. Sin valores por d
 Para validar: actualizar el módulo y duplicar nuevamente un original que tenga fecha y precio de venta distinto de cero. Comparar original y nueva copia, comprobando que el original permanece intacto.
 
 copy=False no vuelve un campo de solo lectura ni impide completar el valor manualmente. Impide copiar su valor automáticamente durante la duplicación estándar.
+
+### Validación del punto 19
+
+El estudiante confirmó la nueva duplicación. La captura de Casa Banfield muestra fecha de disponibilidad vacía y precio de venta 0.00, mientras conserva código postal 1828, tres habitaciones y orientación Norte. Esto coincide con el resultado esperado tras aplicar copy=False. La captura de la copia no permite comprobar por sí sola que el original permanece intacto.
+
+Estado: duplicación validada por la confirmación del estudiante y los valores visibles de la nueva copia.
