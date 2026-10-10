@@ -77,7 +77,18 @@
                     string="Mis propiedades"
                     domain="[('create_uid', '=', uid)]"
                 />
+                <separator/>
+                <filter
+                    name="available_properties"
+                    string="Propiedades disponibles"
+                    domain="[('state', 'in', ['new', 'offer_received'])]"
+                />
                 <group>
+                    <filter
+                        name="group_by_state"
+                        string="Estado"
+                        context="{'group_by': 'state'}"
+                    />
                     <filter
                         name="group_by_creator"
                         string="Creado por"
