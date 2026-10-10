@@ -266,3 +266,17 @@ Las capturas muestran:
 La captura del desplegable también mostró Creado por y Mes de creación. Su agrupación con datos todavía no se comprobó. Otros campos de búsqueda se implementaron, pero no se probaron individualmente.
 
 El filtro Mis propiedades incluyó los registros del usuario; no se hizo todavía una prueba con registros de otro creador que deban excluirse.
+
+### Evidencias adicionales del punto 17
+
+La agrupación Creado por muestra Mitchell Admin con Casa Lanús y Casa Banfield. La captura de fecha muestra Mes de creación: Day y el grupo 10 Oct 2026: se probó la granularidad diaria, no la mensual. Para completar la comprobación por mes, seleccionar Month en el submenú de la agrupación y observar octubre de 2026.
+
+## Punto 18 — Duplicar una propiedad
+
+Estado: duplicación observada en las capturas; comparación de fecha y precio no concluyente por valores vacíos/cero.
+
+La lista pasó a tres registros, con dos llamados Casa Lanús. El formulario del tercero muestra Casa Lanús, código postal 1824, dos habitaciones y orientación Norte. La duplicación conservó el título, sin agregar automáticamente un sufijo de copia en este modelo.
+
+Duplicar crea un registro independiente. El ID y los campos automáticos de creación se generan para el nuevo registro; los campos copiables conservan los valores del original.
+
+La captura muestra date_availability vacío y selling_price=0.00. Esos valores no permiten distinguir si fueron copiados o reinicializados. Antes del punto 19, completar fecha y precio de venta en el original y duplicarlo permite comparar el comportamiento con y sin copy=False.
