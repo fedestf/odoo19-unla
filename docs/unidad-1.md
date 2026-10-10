@@ -238,7 +238,7 @@ Fuente técnica: código oficial Odoo 19, res_groups.py y res_groups_privilege.p
 
 ## Punto 17 — Vista de búsqueda
 
-Estado: código preparado y XML comprobado; ejecución pendiente de validar.
+Estado: vista cargada y pruebas con datos verificadas para Mis propiedades, agrupación por Código Postal y búsqueda por Habitaciones.
 
 En estate_property_views.xml se crea estate_property_search_view de ir.ui.view, vinculada a estate.property. La acción la referencia expresamente mediante search_view_id.
 
@@ -255,3 +255,14 @@ Para validar: actualizar el módulo, abrir Propiedades y desplegar el buscador. 
 Crear propiedades de prueba con distintos códigos postales y valores permite comprobar resultados. Para crear, el usuario debe pertenecer al Manager del módulo. La aparición de controles no demuestra por sí sola el comportamiento del filtrado con datos.
 
 No se cambian permisos ni se crea aún una vista de lista o formulario personalizada.
+
+### Evidencias del punto 17
+
+Las capturas muestran:
+- Mis propiedades: Casa Lanús y Casa Banfield (dos registros).
+- Código Postal: grupo 1824 con Casa Lanús y grupo 1828 con Casa Banfield.
+- Habitaciones = 3: solo Casa Banfield.
+
+La captura del desplegable también mostró Creado por y Mes de creación. Su agrupación con datos todavía no se comprobó. Otros campos de búsqueda se implementaron, pero no se probaron individualmente.
+
+El filtro Mis propiedades incluyó los registros del usuario; no se hizo todavía una prueba con registros de otro creador que deban excluirse.
