@@ -372,3 +372,13 @@ Para validar: actualizar el módulo, abrir una propiedad desde la lista y compro
 Las dos capturas de una propiedad guardada muestran el formulario personalizado: título destacado, código postal y fecha a la izquierda, precios a la derecha, y barra de estado con Oferta recibida resaltado. La pestaña Descripción muestra descripción, habitaciones, superficie cubierta, fachadas y garage; la pestaña Jardín muestra jardín, superficie de jardín y orientación.
 
 Estado: estructura y ambas pestañas validadas visualmente en Odoo. Las capturas no prueban todavía el placeholder del formulario nuevo ni una edición guardada desde esta vista.
+
+## Punto 24 — Disponibilidad y agrupación por estado
+
+Estado: XML y expresiones de dominio/contexto verificados; prueba en Odoo pendiente.
+
+La vista search agrega el filtro Propiedades disponibles con dominio [('state', 'in', ['new', 'offer_received'])]. Incluye Nuevo y Oferta recibida, y excluye Oferta aceptada, Vendido y Cancelado. El operador in expresa las dos opciones aceptadas. Se añade también Agrupar por Estado con contexto {'group_by': 'state'}.
+
+Un separator distingue el filtro de disponibilidad de Mis propiedades: si se activan ambos se combinan por AND, para mostrar propiedades propias que además estén disponibles.
+
+Validación: actualizar el módulo, abrir el menú de búsqueda, activar Propiedades disponibles y luego agrupar por Estado. Deben aparecer únicamente grupos Nuevo y Oferta recibida que contengan registros. Quitar el filtro de disponibilidad debe permitir ver los demás estados si existen registros. Un filtro modifica la búsqueda, no concede permisos de acceso.
