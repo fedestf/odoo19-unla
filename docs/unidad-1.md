@@ -567,3 +567,9 @@ salesman_id usa default=lambda self: self.env.user: la función obtiene el usuar
 Los sufijos _id para Many2one y _ids para relaciones múltiples son convenciones de nombres que facilitan la lectura; el tipo real se define mediante fields.Many2one, fields.One2many o fields.Many2many.
 
 Referencia para relaciones: [implementación oficial de campos relacionales de Odoo 19](https://github.com/odoo/odoo/blob/19.0/odoo/orm/fields_relational.py).
+
+### Confirmación de los tres campos del punto 29
+
+La nueva captura muestra buyer_id con etiqueta Comprador y tipo many2one. Junto con la captura anterior de property_type_id y salesman_id, queda verificada la carga de las tres relaciones en Odoo. Los modelos relacionados fueron comprobados en el código; estas capturas muestran los nombres y tipos de campos.
+
+Estado: carga de campos del punto 29 validada. La prueba del vendedor predeterminado y al duplicar se realizará al incorporar los campos al formulario en el punto 30.
