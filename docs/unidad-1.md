@@ -474,3 +474,96 @@ Se agregan property_type_id (Tipo Propiedad) vinculado a estate.property.type, b
 salesman_id usa copy=False y default=lambda self: self.env.user: el valor predeterminado se calcula con el usuario del entorno. Al duplicar no se toma el vendedor del original; se aplica el usuario que solicita la copia. Los otros dos campos conservan el comportamiento normal de copia.
 
 Para comprobar la carga: actualizar real_estate y consultar Ajustes → Técnico → Estructura de la base de datos → Modelos → estate.property → Campos. Buscar property_type_id, buyer_id y salesman_id; deben ser many2one con las relaciones indicadas. El formulario personalizado actual no los muestra todavía; incorporarlos a la vista corresponde al punto 30. La comprobación del usuario predeterminado y de duplicación podrá hacerse desde ese formulario.
+
+### Comprobación parcial del punto 29
+
+La captura de Campos de Propiedad muestra property_type_id y salesman_id como many2one. buyer_id no está visible en este recorte. La comprobación de los tres campos y de los valores predeterminados continúa en la siguiente etapa.
+
+## Apunte de estudio — Tipos de campos y relaciones
+
+Este apartado se ampliará a medida que aparezcan nuevos conceptos en el práctico.
+
+### Campos de valores simples
+
+| Tipo de Odoo | Qué representa | Ejemplo del práctico |
+| --- | --- | --- |
+| Char | Texto corto | name (título), postcode (código postal) |
+| Text | Texto extenso | description |
+| Integer | Número entero | bedrooms, living_area |
+| Float | Número con decimales | expected_price, selling_price |
+| Boolean | Verdadero o falso | garage, garden |
+| Date | Fecha sin hora | date_availability |
+| Datetime | Fecha y hora | create_date, write_date |
+| Selection | Una opción de un conjunto definido | state, garden_orientation |
+
+Un código postal se define como Char porque es un identificador: puede tener letras o ceros iniciales y no se usa para cálculos. Date y Datetime son distintos: una fecha de disponibilidad no necesita hora; una auditoría puede necesitarla.
+
+Selection tiene pares (valor técnico, etiqueta). Por ejemplo, ("new", "Nuevo"): el código usa new y la interfaz muestra Nuevo.
+
+### Relaciones entre modelos
+
+Un modelo representa un tipo de entidad; un registro es una instancia concreta. estate.property es el modelo de propiedades y Casa Lanús es uno de sus registros. comodel_name identifica el modelo relacionado.
+
+| Campo | Cardinalidad | Ejemplo |
+| --- | --- | --- |
+| Many2one | Cada registro apunta a cero o un registro del otro modelo; muchos registros pueden apuntar al mismo | Muchas propiedades pueden tener el tipo Casa; cada propiedad elige un solo tipo |
+| One2many | Un registro reúne los registros del otro modelo que lo apuntan mediante un Many2one inverso | Un tipo puede reunir todas las propiedades que tienen ese tipo |
+| Many2many | Cada registro puede vincularse con varios del otro modelo, y viceversa | Una propiedad puede tener varias etiquetas; una etiqueta puede usarse en varias propiedades |
+
+Many2one no permite elegir varios valores en una misma propiedad. El nombre “muchos a uno” describe la relación entre el conjunto de propiedades y el registro relacionado.
+
+Ejemplo implementado:
+
+```python
+property_type_id = fields.Many2one(
+    comodel_name="estate.property.type",
+    string="Tipo Propiedad",
+)
+```
+
+Una propiedad puede elegir Casa, y otras propiedades también pueden elegir Casa. En el caso normal de un Many2one almacenado, la tabla de propiedades contiene el ID del tipo relacionado, no su nombre. En Python, el ORM devuelve un conjunto de cero o un registro, permitiendo acceder a property.property_type_id.name.
+
+Ejemplo conceptual de One2many (todavía no agregado al código del práctico):
+
+```python
+# En estate.property.type:
+property_ids = fields.One2many(
+    comodel_name="estate.property",
+    inverse_name="property_type_id",
+    string="Propiedades",
+)
+```
+
+inverse_name nombra el Many2one del modelo relacionado. One2many obtiene los registros que apuntan al tipo actual; no almacena una lista de IDs en una columna del tipo.
+
+Ejemplo conceptual de Many2many (para una etapa posterior):
+
+```python
+tag_ids = fields.Many2many(
+    comodel_name="estate.property.tag",
+    string="Etiquetas",
+)
+```
+
+En una relación Many2many almacenada normal se utiliza una tabla intermedia con pares de IDs. No requiere un Many2one inverso como One2many.
+
+### Parámetros frecuentes
+
+| Parámetro | Significado |
+| --- | --- |
+| string | Etiqueta visible en la interfaz |
+| required=True | El campo debe tener un valor válido |
+| default | Valor inicial, constante o calculado por una función |
+| copy=False | El valor del original no se copia en la duplicación estándar; puede aplicarse un default |
+| comodel_name | Nombre técnico del modelo relacionado |
+| inverse_name | Many2one inverso utilizado por One2many |
+| readonly=True | Campo presentado como solo lectura; no reemplaza los permisos ni las reglas del servidor |
+| domain | Expresión que restringe candidatos o resultados; no concede permisos |
+
+El tipo de campo define el dato y su relación. El widget define cómo se presenta: state sigue siendo Selection aunque se muestre como statusbar. Una vista decide qué campos aparecen; agregar un campo al modelo no lo agrega automáticamente a una vista personalizada.
+
+salesman_id usa default=lambda self: self.env.user: la función obtiene el usuario del entorno cuando se necesita el valor inicial. Con copy=False, una copia recibe ese default en vez del vendedor del original.
+
+Los sufijos _id para Many2one y _ids para relaciones múltiples son convenciones de nombres que facilitan la lectura; el tipo real se define mediante fields.Many2one, fields.One2many o fields.Many2many.
+
+Referencia para relaciones: [implementación oficial de campos relacionales de Odoo 19](https://github.com/odoo/odoo/blob/19.0/odoo/orm/fields_relational.py).
