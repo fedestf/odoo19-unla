@@ -464,3 +464,13 @@ Validación: actualizar real_estate, recargar el navegador, entrar a Inmobiliari
 La captura muestra Inmobiliaria con los menús Anuncios y Ajustes. El desplegable de Ajustes incluye Tipos de propiedad, y la acción abierta muestra la lista con el registro Casa (1-1 / 1). Quedan comprobados la jerarquía del menú y su conexión con la acción del punto 27.
 
 Estado: punto 28 validado visualmente en Odoo.
+
+## Punto 29 — Relaciones Many2one
+
+Estado: sintaxis, modelos relacionados y configuración del vendedor verificados; carga en Odoo pendiente.
+
+Se agregan property_type_id (Tipo Propiedad) vinculado a estate.property.type, buyer_id (Comprador) vinculado a res.partner y salesman_id (Vendedor) vinculado a res.users. Cada Many2one permite asociar una propiedad con un registro del modelo indicado. Los campos no son obligatorios en esta consigna.
+
+salesman_id usa copy=False y default=lambda self: self.env.user: el valor predeterminado se calcula con el usuario del entorno. Al duplicar no se toma el vendedor del original; se aplica el usuario que solicita la copia. Los otros dos campos conservan el comportamiento normal de copia.
+
+Para comprobar la carga: actualizar real_estate y consultar Ajustes → Técnico → Estructura de la base de datos → Modelos → estate.property → Campos. Buscar property_type_id, buyer_id y salesman_id; deben ser many2one con las relaciones indicadas. El formulario personalizado actual no los muestra todavía; incorporarlos a la vista corresponde al punto 30. La comprobación del usuario predeterminado y de duplicación podrá hacerse desde ese formulario.
