@@ -755,3 +755,13 @@ Validación: actualizar real_estate y revisar Campos de estate.property. offer_i
 La captura de Campos de Propiedad muestra offer_ids, etiqueta Ofertas y tipo one2many. Queda confirmada la carga del campo en Odoo. El modelo relacionado y el inverso se verificaron en el código; las ofertas se probarán desde el formulario en los puntos siguientes. La pantalla muestra un aviso de página desactualizada, por lo que se recomienda recargar antes de continuar.
 
 Estado: punto 39 validado mediante metadatos del campo. Avance de Unidad 1: 39/41 completados; faltan 2 puntos (40 y 41).
+
+## Punto 40 — Lista editable de ofertas
+
+Avance: 39/41 completados; punto 40/41 preparado. Faltan 2 por validar, incluido este.
+
+Se crea views/estate_property_offer_views.xml con vista estate_property_offer_list_view, modelo estate.property.offer, arquitectura list editable="top" y columnas price, partner_id, status (Precio, Ofertante, Estado). Se declara en el manifiesto antes de la vista de propiedades. XML, columnas y orden de carga verificados.
+
+No se crea una acción: las ofertas se mostrarán dentro de offer_ids en el formulario de su propiedad. Ese One2many permite acceder a las ofertas del registro padre sin un menú o acción independiente. El punto 41 incorporará la pestaña y permitirá probar creación de ofertas; Odoo vinculará las ofertas creadas desde esa colección mediante property_id.
+
+Para verificar la carga antes del punto 41: actualizar el módulo y consultar Ajustes → Técnico → Interfaz de usuario → Vistas. Buscar estate.property.offer.list; debe ser una vista de lista del modelo estate.property.offer. La prueba de uso y edición queda pendiente hasta incluir el campo en el formulario.
