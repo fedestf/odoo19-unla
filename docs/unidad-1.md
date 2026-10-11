@@ -703,3 +703,13 @@ Avance: 35/41 completados; punto 36 parcialmente validado. Faltan 6 por cerrar, 
 La captura de Casa Lanús muestra LUMINOSA como etiqueta compacta debajo del título. Junto con la captura anterior de la lista, quedan validadas ambas ubicaciones de tag_ids con many2many_tags y la asociación guardada.
 
 Estado: implementación y presentación del punto 36 validadas en Odoo. Avance de Unidad 1: 36/41 completados; faltan 5 puntos (37 a 41). La comparación exploratoria sin widget y la prueba de varias etiquetas compartidas siguen disponibles como ejercicios de estudio adicionales, sin estar demostradas por estas capturas.
+
+## Punto 37 — Modelo de ofertas sobre propiedades
+
+Avance: 36/41 completados; punto 37/41 preparado. Faltan 5 por validar, incluido este.
+
+Se crea e importa estate.property.offer con descripción Oferta sobre propiedad. Campos: price Float obligatorio con etiqueta Precio; status Selection opcional con accepted (Aceptada) y refused (Rechazada); partner_id Many2one obligatorio hacia res.partner, etiqueta Ofertante; property_id Many2one obligatorio hacia estate.property, etiqueta Propiedad. Sintaxis y definición verificadas; carga en Odoo pendiente.
+
+Para validar: actualizar real_estate y buscar estate.property.offer en Ajustes → Técnico → Estructura de la base de datos → Modelos. Revisar sus cuatro campos y los obligatorios. Los permisos corresponden al punto 38; la relación inversa y las vistas llegan en los puntos siguientes. Puede aparecer una advertencia de permisos ausentes en esta etapa.
+
+Apunte de estudio: cada oferta apunta a una propiedad y un contacto, pero varias ofertas pueden apuntar a la misma propiedad o al mismo contacto. Ambos enlaces son Many2one. status pertenece a la oferta y es distinto de state de la propiedad. Una oferta todavía no aceptada ni rechazada puede tener status vacío. required=True en price no impone precio positivo: una regla de positividad requiere una validación adicional cuando la guía la solicite.
