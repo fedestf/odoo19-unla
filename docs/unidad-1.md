@@ -749,3 +749,9 @@ property_id es el Many2one definido en cada oferta que identifica su propiedad. 
 En esta relación normal, offer_ids no guarda una lista de IDs en una columna de estate_property. El enlace persistente está en property_id de la tabla estate_property_offer. El ORM obtiene la colección inversa a partir de ese enlace. Virtual no significa que las ofertas sean temporales ni que se pierdan: son registros persistentes, y el ORM permite crear o modificar la colección mediante operaciones relacionales.
 
 Validación: actualizar real_estate y revisar Campos de estate.property. offer_ids debe mostrar etiqueta Ofertas y tipo one2many; su modelo relacionado debe ser estate.property.offer y el inverso property_id. Su presentación y uso se incorporan en los puntos 40 y 41.
+
+### Validación del punto 39
+
+La captura de Campos de Propiedad muestra offer_ids, etiqueta Ofertas y tipo one2many. Queda confirmada la carga del campo en Odoo. El modelo relacionado y el inverso se verificaron en el código; las ofertas se probarán desde el formulario en los puntos siguientes. La pantalla muestra un aviso de página desactualizada, por lo que se recomienda recargar antes de continuar.
+
+Estado: punto 39 validado mediante metadatos del campo. Avance de Unidad 1: 39/41 completados; faltan 2 puntos (40 y 41).
