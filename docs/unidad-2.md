@@ -25,3 +25,15 @@ El comportamiento de recálculo tras modificar las entradas depende de declarar 
 La captura de Campos de Propiedad muestra total_area, etiqueta Superficie total, tipo integer y Readonly marcado. Se confirma el registro del campo en Odoo; su método compute y suma se verificaron en el código. Esta pantalla no muestra el cálculo ejecutado en el formulario, que se probará en el punto 2.
 
 Estado: punto 1 validado mediante carga del campo y verificación del método. Avance de Unidad 2: 1/27 completados; faltan 26.
+
+## Punto 2 — Superficie total en el formulario
+
+Avance: 1/27 completados; punto 2 preparado para validación. Faltan 26, incluido este. Preferencia del estudiante: al validar un punto, continuar directamente con el siguiente sin pedir otro mensaje de avance.
+
+Se incorpora total_area después de living_area en la página Descripción. XML y ubicación verificados. El campo conserva compute sin store=True ni api.depends según la secuencia de ejercicios.
+
+Prueba: actualizar el módulo y abrir una propiedad de prueba. Ingresar Superficie cubierta 100 y Superficie jardín 25 en sus respectivas pestañas. Volver a Descripción y observar Superficie total antes de guardar; luego guardar y reabrir para comprobar el cálculo 125. Cambiar cubierta a 120 y observar el resultado antes y después de guardar/reabrir (esperado al calcular desde los datos actuales: 145).
+
+Si el valor no se refresca inmediatamente, registrar el comportamiento real: todavía no hay dependencias declaradas para invalidar el valor computado al cambiar las entradas. No dar por probado el recálculo interactivo solo porque la suma se vea correcta después de reabrir. Las dependencias se incorporarán en el punto 5.
+
+Estado: código preparado; observación del formulario pendiente.
