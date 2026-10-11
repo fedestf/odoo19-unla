@@ -655,3 +655,9 @@ Se agrega real_estate_menu_property_tags en real_estate_menuitem.xml, con nombre
 Estado: XML y referencia del menú verificados; prueba visual en Odoo pendiente. Actualizar el módulo, recargar y abrir Inmobiliaria → Ajustes → Etiquetas de propiedad. Debe mostrarse la lista con LUMINOSA.
 
 Apunte: el menuitem proporciona navegación y la acción determina el modelo y las vistas que se abren. Crear un menú no concede permisos sobre el modelo; se aplican las ACL definidas en el punto 32.
+
+### Validación del punto 34
+
+La captura muestra Ajustes con las opciones Tipos de propiedad y Etiquetas de propiedad. La acción de etiquetas está abierta y muestra LUMINOSA (1 registro). Se confirma la navegación desde el menú y su conexión con la acción.
+
+Estado: punto 34 validado visualmente en Odoo. Avance de Unidad 1: 34/41 completados; faltan 7 puntos (35 a 41).
