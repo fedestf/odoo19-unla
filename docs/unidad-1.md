@@ -623,3 +623,9 @@ Se agregan dos ACL para model_estate_property_tag: estate.property.tag.manager, 
 Para validar la carga: actualizar real_estate, abrir Ajustes → Técnico → Seguridad → Access Rights y buscar estate.property.tag por nombre de regla. Deben aparecer ambas reglas con los permisos indicados. La prueba de operaciones desde la interfaz se realizará cuando se incorporen acción y menú.
 
 Apunte de estudio: las columnas perm_read, perm_write, perm_create y perm_unlink representan leer, modificar, crear y borrar. El valor 1 concede ese permiso dentro de la ACL y 0 no lo concede. Las concesiones de todos los grupos del usuario se suman; una regla con 0 no revoca un permiso concedido por otra. Para probar Vendedor como solo lectura, no asignar al usuario también Manager ni usar modo superusuario.
+
+### Validación de carga del punto 32
+
+La captura de Access Rights filtrada por estate.property.tag muestra estate.property.tag.manager sobre Etiqueta de propiedad con lectura, escritura, creación y borrado marcados. La regla estate.property.tag.salesman tiene únicamente lectura marcada.
+
+Estado: carga y configuración de permisos del punto 32 validadas visualmente en Odoo. La prueba de operaciones con usuarios de cada grupo queda para cuando se incorporen la acción y el menú de etiquetas.
