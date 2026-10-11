@@ -19,3 +19,9 @@ compute indica el método que calcula el valor del campo. La convención _comput
 Un campo computado sin almacenamiento se calcula a través del ORM cuando hace falta su valor; no genera una columna propia para guardar el resultado en la tabla. Sus campos de origen sí pueden estar almacenados. Los campos computados son de solo lectura por defecto cuando no tienen un método inverse.
 
 El comportamiento de recálculo tras modificar las entradas depende de declarar las dependencias. Se observará paso a paso en los próximos ejercicios; aún no se considera probado el recálculo interactivo en el formulario.
+
+### Validación de carga del punto 1
+
+La captura de Campos de Propiedad muestra total_area, etiqueta Superficie total, tipo integer y Readonly marcado. Se confirma el registro del campo en Odoo; su método compute y suma se verificaron en el código. Esta pantalla no muestra el cálculo ejecutado en el formulario, que se probará en el punto 2.
+
+Estado: punto 1 validado mediante carga del campo y verificación del método. Avance de Unidad 2: 1/27 completados; faltan 26.
