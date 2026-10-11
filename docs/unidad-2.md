@@ -104,3 +104,17 @@ Estado: punto 5 validado mediante resultados de la prueba indicada. Avance: 5/27
 No requiere cambios de código. Abrir una propiedad de prueba y, en Ofertas, registrar al menos dos ofertantes distintos con precios diferentes. Por ejemplo, 50000 y 65000. Estado puede quedar vacío. Guardar, reabrir y comprobar que ambas ofertas siguen asociadas a esa propiedad. Si ya existe una oferta de 50000, basta agregar otra con distinto ofertante y precio 65000 en esa misma propiedad.
 
 Estado: carga de ofertas pendiente. Estos datos servirán para comprobar el máximo calculado por best_offer en el punto 7. Dos filas en una misma propiedad permiten comparar sus precios; usar propiedades distintas no valida ese máximo por propiedad.
+
+### Validación del punto 6
+
+Casa Lanús muestra ofertas guardadas de 65000 de Douglas Fletcher y 50000 de Floyd Steward, ambas con Estado vacío. Se confirma la preparación de dos ofertantes y precios diferentes en una misma propiedad. Avance: 6/27 completados; faltan 21.
+
+## Punto 7 — Mejor oferta computada
+
+Se agrega best_offer como Float computado, etiqueta Mejor oferta, debajo de selling_price en el formulario. _compute_best_offer usa offer_ids.mapped("price") y max(..., default=0.0). @api.depends("offer_ids.price") declara la dependencia de los precios de las ofertas relacionadas. Se incluye toda oferta, sin filtrar estado, como indica la consigna.
+
+No se almacena en esta etapa: el máximo es barato de calcular para el conjunto pequeño del práctico y evita una columna de resultado. Si se necesitara búsqueda SQL, agrupación o consultas frecuentes sobre grandes volúmenes, podría evaluarse store=True con dependencias correctas y su costo de recomputación. Almacenar es una decisión de uso y rendimiento, no una condición para mostrar el campo.
+
+Apunte: mapped devuelve aquí la lista de precios; max obtiene el mayor. default=0.0 resuelve el caso sin ofertas, evitando un error por una lista vacía. La dependencia con punto recorre el One2many hasta price de cada oferta.
+
+Estado: sintaxis, ubicación XML y método aislado verificados para [50000,65000]→65000, []→0 y [70000]→70000. Prueba ORM pendiente. Actualizar, abrir Casa Lanús y verificar Mejor oferta 65000. Cambiar la oferta mayor a 70000, guardar y reabrir: debe mostrar 70000. En otra propiedad sin ofertas, debe mostrar 0.
