@@ -639,3 +639,9 @@ Se crea estate_property_tag_views.xml con acción Etiquetas de propiedad para es
 editable="top" permite crear y editar en las filas de la lista, colocando las nuevas arriba. No concede permisos: Manager puede editar y Vendedor solo leer según sus ACL. El menú de etiquetas se agregará en el punto 34.
 
 Para validar: actualizar y abrir /odoo/action-real_estate.estate_property_tag_action como Manager, crear Luminosa desde New y guardar. En Ajustes → Tipos de propiedad, crear Departamento de la misma manera. Debe conservarse Casa. Comprobar que ambos registros se crean sin abrir formulario.
+
+### Validación del punto 33
+
+Las capturas posteriores a las instrucciones de creación desde lista muestran DEPARTAMENTO y Casa en Tipos de propiedad (2 registros), y LUMINOSA en Etiquetas de propiedad (1 registro). Se confirma el guardado de los nuevos registros y la conservación de Casa. Las capturas muestran el resultado guardado, no el proceso de edición de la fila.
+
+Estado: punto 33 validado mediante los resultados de la prueba indicada. Avance de Unidad 1: 33/41 completados; faltan 8 puntos (34 a 41).
