@@ -27,4 +27,11 @@
         action="estate_property_type_action"
         sequence="10"
     />
+    <menuitem
+        id="real_estate_menu_property_tags"
+        name="Etiquetas de propiedad"
+        parent="real_estate_menu_settings"
+        action="estate_property_tag_action"
+        sequence="20"
+    />
 </odoo>
