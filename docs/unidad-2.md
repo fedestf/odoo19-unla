@@ -134,3 +134,17 @@ Prueba: actualizar real_estate, abrir una propiedad y entrar en Ofertas. Pulsar 
 Apunte: editable="top" habilita edición en línea en esa vista, colocando registros nuevos arriba; quitarlo cambia la forma de interacción, no los permisos ni los datos guardados. El formulario puede ser generado automáticamente por Odoo si no hay uno personalizado.
 
 Estado: punto 8 preparado para validación; avance 7/27.
+
+### Validación del punto 8 y recálculo del punto 7
+
+La primera captura muestra formulario emergente de una oferta con precio 70000. La segunda muestra la oferta de 70000 y la de 50000 en Casa Lanús, y Mejor oferta 70000. Se confirma apertura del formulario y actualización del máximo siguiendo la prueba indicada. El caso sin ofertas sigue sin captura.
+
+Avance: 8/27 completados; faltan 19.
+
+## Punto 9 — Validez y fecha límite
+
+Se agregan validity Integer con etiqueta Validez (días) y default=7, y date_deadline Date con etiqueta Fecha límite, al modelo de ofertas. Se incluyen ambos en la lista tras Estado. Sintaxis, valor predeterminado y columnas verificados; carga y prueba pendientes.
+
+En este punto ambos son campos normales independientes: ingresar días no calcula aún la fecha ni ingresar fecha modifica los días. Esa relación compute/inverse corresponde al punto 10. Date no contiene hora y validity expresa una cantidad de días, no una fecha.
+
+Validación: actualizar, abrir Ofertas de una propiedad y comprobar ambas columnas. Add a line debe abrir formulario con Validez 7 y Fecha límite vacía. Completar precio y ofertante, ingresar una fecha manual y guardar el formulario y la propiedad. Verificar que días y fecha se conservan en la fila. Puede descartarse la oferta nueva si solo se quiere inspeccionar los valores iniciales.
