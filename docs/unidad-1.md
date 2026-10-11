@@ -675,3 +675,9 @@ Una propiedad puede tener varias etiquetas, por ejemplo Luminosa y Espaciosa. La
 Many2one limitaría cada propiedad a una sola etiqueta. One2many, usando un Many2one inverso desde la etiqueta, haría que cada registro de etiqueta apunte a una sola propiedad, impidiendo compartir ese mismo registro entre varias propiedades. Many2many permite ambas multiplicidades sin duplicar la etiqueta.
 
 En esta relación almacenada normal, Odoo mantiene una tabla intermedia con pares de IDs de propiedad y etiqueta. Quitar una asociación no equivale a borrar el registro de etiqueta; la etiqueta puede seguir vinculada a otras propiedades. El sufijo _ids expresa por convención que se trata de una relación múltiple.
+
+### Validación del punto 35
+
+La captura de Campos del modelo Propiedad muestra tag_ids, etiqueta Etiquetas y tipo many2many. Se confirma la carga del campo en Odoo. La relación con estate.property.tag se verificó en el código; la selección y guardado de etiquetas se probarán al mostrar el campo en el punto 36.
+
+Estado: punto 35 validado mediante los metadatos de campos. Avance de Unidad 1: 35/41 completados; faltan 6 puntos (36 a 41).
