@@ -118,3 +118,19 @@ No se almacena en esta etapa: el máximo es barato de calcular para el conjunto 
 Apunte: mapped devuelve aquí la lista de precios; max obtiene el mayor. default=0.0 resuelve el caso sin ofertas, evitando un error por una lista vacía. La dependencia con punto recorre el One2many hasta price de cada oferta.
 
 Estado: sintaxis, ubicación XML y método aislado verificados para [50000,65000]→65000, []→0 y [70000]→70000. Prueba ORM pendiente. Actualizar, abrir Casa Lanús y verificar Mejor oferta 65000. Cambiar la oferta mayor a 70000, guardar y reabrir: debe mostrar 70000. En otra propiedad sin ofertas, debe mostrar 0.
+
+### Validación del resultado inicial del punto 7
+
+La captura de Casa Lanús muestra Mejor oferta 65,000.00 debajo de Precio de venta, coincidiendo con el máximo de las dos ofertas registradas en el punto 6. Se confirma presentación y cálculo inicial. La prueba de cambio a 70000 y de propiedad sin ofertas no fue aportada; se conservan como verificaciones pendientes.
+
+Avance: 7/27 implementaciones y resultados iniciales comprobados; faltan 20 puntos.
+
+## Punto 8 — Ofertas desde un formulario
+
+Se quita editable="top" de la vista de lista de ofertas, conservando Precio, Ofertante y Estado. XML y ausencia del atributo verificados. Al agregar o abrir una oferta desde el One2many se espera un formulario emergente, en lugar de una fila editable. El menú y la acción de propiedades no cambian.
+
+Prueba: actualizar real_estate, abrir una propiedad y entrar en Ofertas. Pulsar una oferta existente o Add a line: debe abrir un formulario. Aprovecharlo para cambiar la oferta mayor de 65000 a 70000, guardar el formulario y la propiedad, y reabrir: Mejor oferta debe mostrar 70000. Esto completa la prueba de recálculo pendiente del punto 7. Una propiedad sin ofertas debe mostrar 0.
+
+Apunte: editable="top" habilita edición en línea en esa vista, colocando registros nuevos arriba; quitarlo cambia la forma de interacción, no los permisos ni los datos guardados. El formulario puede ser generado automáticamente por Odoo si no hay uno personalizado.
+
+Estado: punto 8 preparado para validación; avance 7/27.
