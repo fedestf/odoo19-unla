@@ -697,3 +697,9 @@ Para validar: actualizar el módulo, abrir una propiedad como Manager, seleccion
 La captura muestra la columna Etiquetas como segunda columna y LUMINOSA presentada como etiqueta compacta en Casa Lanús. Se confirma la asociación guardada y su presentación en la lista mediante many2many_tags. Falta la captura del formulario para validar visualmente la ubicación debajo del título.
 
 Avance: 35/41 completados; punto 36 parcialmente validado. Faltan 6 por cerrar, incluido el 36.
+
+### Validación del formulario del punto 36
+
+La captura de Casa Lanús muestra LUMINOSA como etiqueta compacta debajo del título. Junto con la captura anterior de la lista, quedan validadas ambas ubicaciones de tag_ids con many2many_tags y la asociación guardada.
+
+Estado: implementación y presentación del punto 36 validadas en Odoo. Avance de Unidad 1: 36/41 completados; faltan 5 puntos (37 a 41). La comparación exploratoria sin widget y la prueba de varias etiquetas compartidas siguen disponibles como ejercicios de estudio adicionales, sin estar demostradas por estas capturas.
