@@ -713,3 +713,9 @@ Se crea e importa estate.property.offer con descripción Oferta sobre propiedad.
 Para validar: actualizar real_estate y buscar estate.property.offer en Ajustes → Técnico → Estructura de la base de datos → Modelos. Revisar sus cuatro campos y los obligatorios. Los permisos corresponden al punto 38; la relación inversa y las vistas llegan en los puntos siguientes. Puede aparecer una advertencia de permisos ausentes en esta etapa.
 
 Apunte de estudio: cada oferta apunta a una propiedad y un contacto, pero varias ofertas pueden apuntar a la misma propiedad o al mismo contacto. Ambos enlaces son Many2one. status pertenece a la oferta y es distinto de state de la propiedad. Una oferta todavía no aceptada ni rechazada puede tener status vacío. required=True en price no impone precio positivo: una regla de positividad requiere una validación adicional cuando la guía la solicite.
+
+### Validación de registro del punto 37
+
+La captura de Modelos muestra estate.property.offer con descripción Oferta sobre propiedad, tipo Base Object y Transient Model desmarcado. Se confirma el registro del modelo persistente en Odoo. Sus cuatro campos y atributos se verificaron en el código; el detalle de campos no está visible en esta captura.
+
+Estado: punto 37 validado mediante el registro del modelo en Odoo. Avance de Unidad 1: 37/41 completados; faltan 4 puntos (38 a 41).
