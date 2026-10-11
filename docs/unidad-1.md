@@ -727,3 +727,9 @@ Avance: 37/41 completados; punto 38/41 preparado para prueba. Faltan 4 por valid
 Se agregan ACL para model_estate_property_offer: estate.property.offer.manager permite lectura, escritura, creación y borrado al grupo Manager de Propiedades; estate.property.offer.salesman permite únicamente lectura al Vendedor. Se conservan las seis reglas previas. CSV, identificadores únicos y combinaciones de permisos verificados.
 
 Para validar carga: actualizar el módulo y buscar estate.property.offer en Ajustes → Técnico → Seguridad → Access Rights. Manager debe mostrar cuatro casillas y Vendedor solo Read Access. La prueba de operaciones sobre ofertas llegará cuando estén disponibles en la pestaña de la propiedad. Los permisos de grupos se suman; probar Vendedor sin pertenencia a Manager y sin modo superusuario.
+
+### Validación de carga del punto 38
+
+La captura de Access Rights muestra estate.property.offer.manager sobre Oferta sobre propiedad con lectura, escritura, creación y borrado marcados. estate.property.offer.salesman tiene únicamente lectura. Se confirma la carga y configuración de ambas ACL; la prueba de operaciones con usuarios de cada grupo queda para cuando las ofertas estén visibles en la propiedad.
+
+Estado: configuración del punto 38 validada visualmente en Odoo. Avance de Unidad 1: 38/41 completados; faltan 3 puntos (39 a 41).
