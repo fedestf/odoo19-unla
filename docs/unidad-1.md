@@ -781,3 +781,11 @@ Se agrega al notebook del formulario una página Ofertas con el campo offer_ids.
 Validación: actualizar real_estate y abrir una propiedad de prueba guardada como Manager. En Ofertas, usar Add a line, completar precio 50000 y seleccionar un contacto como Ofertante; dejar Estado vacío para una oferta pendiente. Guardar la propiedad, volver a la lista y reabrirla. La oferta debe conservarse en esa propiedad. El inverso property_id se establece al crear desde offer_ids. Crear una oferta no cambia automáticamente el state de la propiedad en esta etapa; esa lógica se abordará en ejercicios posteriores.
 
 Apunte: la colección pertenece al formulario padre, pero las ofertas son registros del modelo estate.property.offer. La interfaz envía operaciones relacionales al ORM, que crea o modifica esos registros y conserva el enlace mediante property_id. La pestaña organiza la vista y no concede permisos: se aplican las ACL de ofertas del punto 38.
+
+### Validación del punto 41 y cierre de Unidad 1
+
+La captura muestra Casa Lanús guardada, pestaña Ofertas con columnas Precio, Ofertante y Estado, y una oferta de 50,000.00 de Acme Corporation, Floyd Steward, con Estado vacío. Tras la instrucción de guardar y reabrir, se confirma la oferta persistente visible dentro de su propiedad y el uso de la lista del punto 40. La propiedad permanece en Nuevo, coherente con que aún no hay lógica automática de cambio de estado por creación de oferta.
+
+Estado: punto 41 validado en Odoo. Avance de Unidad 1: 41/41 puntos recorridos y sus implementaciones comprobadas según las evidencias registradas; faltan 0 puntos de la unidad.
+
+Las comprobaciones adicionales señaladas en cada apartado (por ejemplo, operaciones completas con usuarios de grupos separados, duplicación del vendedor con usuarios diferentes y comparación sin widget) conservan sus límites de evidencia; el cierre no las da por realizadas.
