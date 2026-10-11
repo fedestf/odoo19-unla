@@ -92,3 +92,15 @@ api.depends declara qué entradas afectan al cálculo. El ORM utiliza esa inform
 Prueba: actualizar real_estate, confirmar jardín 25 y cambiar cubierta a 130. El total debe calcularse como 155; guardar y reabrir para verificar persistencia. Luego cambiar jardín a 30: el total debe resultar 160. No depender únicamente de que la actualización del módulo corrija valores anteriores; modificar las entradas comprueba que las dependencias funcionan.
 
 Estado: punto 5 preparado para validación. Tras validar, continuar automáticamente al punto 6.
+
+### Validación del punto 5
+
+Las capturas muestran cubierta 130 con total 155, y luego cubierta 130 con total 160, siguiendo la prueba de jardín 25 y 30. Se confirma el resultado actualizado tras cambiar las entradas. El jardín no aparece en estos recortes ni se documenta visualmente el momento exacto de actualización.
+
+Estado: punto 5 validado mediante resultados de la prueba indicada. Avance: 5/27 completados; faltan 22.
+
+## Punto 6 — Preparar ofertas de prueba
+
+No requiere cambios de código. Abrir una propiedad de prueba y, en Ofertas, registrar al menos dos ofertantes distintos con precios diferentes. Por ejemplo, 50000 y 65000. Estado puede quedar vacío. Guardar, reabrir y comprobar que ambas ofertas siguen asociadas a esa propiedad. Si ya existe una oferta de 50000, basta agregar otra con distinto ofertante y precio 65000 en esa misma propiedad.
+
+Estado: carga de ofertas pendiente. Estos datos servirán para comprobar el máximo calculado por best_offer en el punto 7. Dos filas en una misma propiedad permiten comparar sus precios; usar propiedades distintas no valida ese máximo por propiedad.
