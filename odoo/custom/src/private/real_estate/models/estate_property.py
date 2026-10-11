@@ -67,3 +67,14 @@ class EstateProperty(models.Model):
         inverse_name="property_id",
         string="Ofertas",
     )
+
+    total_area = fields.Integer(
+        string="Superficie total",
+        compute="_compute_total_area",
+    )
+
+    def _compute_total_area(self):
+        for property_record in self:
+            property_record.total_area = (
+                property_record.living_area + property_record.garden_area
+            )
