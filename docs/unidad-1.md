@@ -613,3 +613,13 @@ Apunte de estudio: _name identifica técnicamente el modelo; _description lo des
 La captura de Modelos muestra estate.property.tag con descripción Etiqueta de propiedad, tipo Base Object y Transient Model desmarcado. Se confirma que Odoo registró el modelo persistente tras la actualización. La definición de name como Char obligatorio se verificó en el código; no aparece en esta captura de la lista de modelos.
 
 Estado: punto 31 validado mediante el registro del modelo en Odoo.
+
+## Punto 32 — Permisos de etiquetas de propiedad
+
+Estado: CSV y combinaciones de permisos verificados; carga en Odoo pendiente.
+
+Se agregan dos ACL para model_estate_property_tag: estate.property.tag.manager, asociada al Manager de Propiedades, permite lectura, escritura, creación y borrado (1,1,1,1); estate.property.tag.salesman, asociada al Vendedor de Propiedades, permite únicamente lectura (1,0,0,0). Se conservan las ACL de propiedades y tipos.
+
+Para validar la carga: actualizar real_estate, abrir Ajustes → Técnico → Seguridad → Access Rights y buscar estate.property.tag por nombre de regla. Deben aparecer ambas reglas con los permisos indicados. La prueba de operaciones desde la interfaz se realizará cuando se incorporen acción y menú.
+
+Apunte de estudio: las columnas perm_read, perm_write, perm_create y perm_unlink representan leer, modificar, crear y borrar. El valor 1 concede ese permiso dentro de la ACL y 0 no lo concede. Las concesiones de todos los grupos del usuario se suman; una regla con 0 no revoca un permiso concedido por otra. Para probar Vendedor como solo lectura, no asignar al usuario también Manager ni usar modo superusuario.
