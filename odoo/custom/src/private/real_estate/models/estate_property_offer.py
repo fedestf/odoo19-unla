@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class EstatePropertyOffer(models.Model):
@@ -25,4 +25,26 @@ class EstatePropertyOffer(models.Model):
     )
 
     validity = fields.Integer(string="Validez (días)", default=7)
-    date_deadline = fields.Date(string="Fecha límite")
+    date_deadline = fields.Date(
+        string="Fecha límite",
+        compute="_compute_date_deadline",
+        inverse="_inverse_date_deadline",
+    )
+
+    def _get_deadline_base_date(self):
+        self.ensure_one()
+        return fields.Date.to_date(self.create_date) or fields.Date.context_today(self)
+
+    @api.depends("create_date", "validity")
+    def _compute_date_deadline(self):
+        for offer in self:
+            offer.date_deadline = fields.Date.add(
+                offer._get_deadline_base_date(), days=offer.validity
+            )
+
+    def _inverse_date_deadline(self):
+        for offer in self:
+            if offer.date_deadline:
+                offer.validity = (
+                    offer.date_deadline - offer._get_deadline_base_date()
+                ).days
