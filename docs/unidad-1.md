@@ -681,3 +681,13 @@ En esta relación almacenada normal, Odoo mantiene una tabla intermedia con pare
 La captura de Campos del modelo Propiedad muestra tag_ids, etiqueta Etiquetas y tipo many2many. Se confirma la carga del campo en Odoo. La relación con estate.property.tag se verificó en el código; la selección y guardado de etiquetas se probarán al mostrar el campo en el punto 36.
 
 Estado: punto 35 validado mediante los metadatos de campos. Avance de Unidad 1: 35/41 completados; faltan 6 puntos (36 a 41).
+
+## Punto 36 — Etiquetas visibles en formulario y lista
+
+Avance: 35/41 completados; punto 36/41 preparado para prueba. Faltan 6 por validar, incluido este.
+
+Se agrega tag_ids debajo del título name en el formulario y como segunda columna de la lista, con widget="many2many_tags" en ambos casos. XML y ubicación de ambas apariciones verificados; prueba visual y guardado pendientes.
+
+Apunte: Many2many define la relación; many2many_tags es el widget que muestra los registros vinculados como etiquetas compactas y permite seleccionarlos en un formulario editable. Cambiar el widget modifica su presentación, no la cardinalidad ni los permisos. Sin este widget, el formulario usa la presentación relacional predeterminada, normalmente una lista de registros relacionados.
+
+Para validar: actualizar el módulo, abrir una propiedad como Manager, seleccionar LUMINOSA debajo del título, guardar y reabrir. Volver a la lista y comprobar la columna Etiquetas. Para ejercitar la relación múltiple, crear ESPACIOSA en Ajustes → Etiquetas de propiedad y asignar ambas a una misma propiedad; usar LUMINOSA en otra comprueba que se comparte el mismo registro de etiqueta. La comparación visual sin widget solicitada en la nota queda pendiente si no se realiza en el entorno de práctica.
