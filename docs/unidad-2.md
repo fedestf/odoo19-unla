@@ -76,3 +76,19 @@ Estado: código preparado; prueba en Odoo y pgweb pendiente. Esta etapa reproduc
 Prueba: actualizar, anotar el total de una propiedad con cubierta 100 y jardín 25; cambiar cubierta a 120, guardar y reabrir. Observar si el total permanece en 125 en lugar de 145. Repetir la consulta de columnas del punto 3: ahora debe incluir total_area. Documentar el comportamiento observado antes de agregar el decorador.
 
 Apunte: store=True almacena el resultado del compute en la base; no convierte el campo en editable ni declara automáticamente las entradas de las que depende. Las dependencias permiten decidir cuándo recalcular un valor almacenado.
+
+### Validación del punto 4
+
+La consulta de pgweb devuelve garden_area, living_area y total_area: el resultado computado ahora tiene columna. La captura del formulario muestra cubierta 120 y total 125, reproduciendo el valor desactualizado esperado con el jardín 25 de la prueba previa. El jardín no está visible en este recorte.
+
+Estado: punto 4 validado. Avance: 4/27 completados; faltan 23.
+
+## Punto 5 — Dependencias del campo computado
+
+Se importa api y se decora _compute_total_area con @api.depends("living_area", "garden_area"). Se conserva store=True. Sintaxis, importación y nombres de dependencias verificados; recálculo con ORM pendiente.
+
+api.depends declara qué entradas afectan al cálculo. El ORM utiliza esa información para invalidar y recomputar el total cuando cambia living_area o garden_area. El decorador no realiza la suma: el método sigue asignando el resultado a cada registro. store=True guarda ese resultado actualizado en la base.
+
+Prueba: actualizar real_estate, confirmar jardín 25 y cambiar cubierta a 130. El total debe calcularse como 155; guardar y reabrir para verificar persistencia. Luego cambiar jardín a 30: el total debe resultar 160. No depender únicamente de que la actualización del módulo corrija valores anteriores; modificar las entradas comprueba que las dependencias funcionan.
+
+Estado: punto 5 preparado para validación. Tras validar, continuar automáticamente al punto 6.
