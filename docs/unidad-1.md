@@ -719,3 +719,11 @@ Apunte de estudio: cada oferta apunta a una propiedad y un contacto, pero varias
 La captura de Modelos muestra estate.property.offer con descripción Oferta sobre propiedad, tipo Base Object y Transient Model desmarcado. Se confirma el registro del modelo persistente en Odoo. Sus cuatro campos y atributos se verificaron en el código; el detalle de campos no está visible en esta captura.
 
 Estado: punto 37 validado mediante el registro del modelo en Odoo. Avance de Unidad 1: 37/41 completados; faltan 4 puntos (38 a 41).
+
+## Punto 38 — Permisos de ofertas
+
+Avance: 37/41 completados; punto 38/41 preparado para prueba. Faltan 4 por validar, incluido este.
+
+Se agregan ACL para model_estate_property_offer: estate.property.offer.manager permite lectura, escritura, creación y borrado al grupo Manager de Propiedades; estate.property.offer.salesman permite únicamente lectura al Vendedor. Se conservan las seis reglas previas. CSV, identificadores únicos y combinaciones de permisos verificados.
+
+Para validar carga: actualizar el módulo y buscar estate.property.offer en Ajustes → Técnico → Seguridad → Access Rights. Manager debe mostrar cuatro casillas y Vendedor solo Read Access. La prueba de operaciones sobre ofertas llegará cuando estén disponibles en la pestaña de la propiedad. Los permisos de grupos se suman; probar Vendedor sin pertenencia a Manager y sin modo superusuario.
