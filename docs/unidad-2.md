@@ -37,3 +37,26 @@ Prueba: actualizar el módulo y abrir una propiedad de prueba. Ingresar Superfic
 Si el valor no se refresca inmediatamente, registrar el comportamiento real: todavía no hay dependencias declaradas para invalidar el valor computado al cambiar las entradas. No dar por probado el recálculo interactivo solo porque la suma se vea correcta después de reabrir. Las dependencias se incorporarán en el punto 5.
 
 Estado: código preparado; observación del formulario pendiente.
+
+### Validación visual del punto 2
+
+La captura de Casa Lanús muestra Superficie cubierta 100 y Superficie total 125 en Descripción, resultado compatible con la prueba indicada de jardín 25. El valor del jardín y el momento de actualización del total no están visibles; no se infiere recálculo inmediato ni reapertura de esta captura.
+
+Estado: presentación y resultado de cálculo del punto 2 validados visualmente. Avance: 2/27 completados; faltan 25.
+
+## Punto 3 — Campo computado no almacenado en pgweb
+
+No requiere cambio de código. Abrir pgweb y consultar las columnas de estate_property. total_area debe estar ausente porque el campo computado no usa store=True; living_area y garden_area sí están almacenados. El ORM calcula el resultado al acceder al campo, lo que permite mostrarlo en el formulario sin una columna persistente.
+
+Consulta de solo lectura para comprobar columnas:
+
+```sql
+SELECT column_name
+FROM information_schema.columns
+WHERE table_schema = 'public'
+  AND table_name = 'estate_property'
+  AND column_name IN ('living_area', 'garden_area', 'total_area')
+ORDER BY column_name;
+```
+
+Resultado esperado: garden_area y living_area, sin total_area. Estado: comprobación en pgweb pendiente. No usar esta ausencia para concluir que falta el campo en Odoo: los metadatos del ORM y las columnas físicas son distintos.
