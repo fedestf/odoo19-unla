@@ -60,3 +60,19 @@ ORDER BY column_name;
 ```
 
 Resultado esperado: garden_area y living_area, sin total_area. Estado: comprobación en pgweb pendiente. No usar esta ausencia para concluir que falta el campo en Odoo: los metadatos del ORM y las columnas físicas son distintos.
+
+### Validación del punto 3
+
+La captura de pgweb muestra la consulta indicada con dos filas: garden_area y living_area, sin total_area. Se confirma que el campo computado no almacenado no genera una columna para su resultado.
+
+Avance: 3/27 completados; faltan 24.
+
+## Punto 4 — Almacenar el campo computado
+
+Se agrega store=True a total_area conservando compute y sin api.depends todavía. Sintaxis y configuración verificadas. La actualización debe crear la columna total_area y calcular sus valores durante la inicialización correspondiente.
+
+Estado: código preparado; prueba en Odoo y pgweb pendiente. Esta etapa reproduce un problema didáctico: sin dependencias declaradas, cambiar living_area o garden_area no informa al ORM que debe recomputar el total almacenado. No se considera una configuración final adecuada; se corregirá en el punto 5 después de observar el resultado real.
+
+Prueba: actualizar, anotar el total de una propiedad con cubierta 100 y jardín 25; cambiar cubierta a 120, guardar y reabrir. Observar si el total permanece en 125 en lugar de 145. Repetir la consulta de columnas del punto 3: ahora debe incluir total_area. Documentar el comportamiento observado antes de agregar el decorador.
+
+Apunte: store=True almacena el resultado del compute en la base; no convierte el campo en editable ni declara automáticamente las entradas de las que depende. Las dependencias permiten decidir cuándo recalcular un valor almacenado.
