@@ -71,6 +71,7 @@ class EstateProperty(models.Model):
     total_area = fields.Integer(
         string="Superficie total",
         compute="_compute_total_area",
+        store=True,
     )
 
     def _compute_total_area(self):
