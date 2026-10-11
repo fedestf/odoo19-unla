@@ -645,3 +645,13 @@ Para validar: actualizar y abrir /odoo/action-real_estate.estate_property_tag_ac
 Las capturas posteriores a las instrucciones de creación desde lista muestran DEPARTAMENTO y Casa en Tipos de propiedad (2 registros), y LUMINOSA en Etiquetas de propiedad (1 registro). Se confirma el guardado de los nuevos registros y la conservación de Casa. Las capturas muestran el resultado guardado, no el proceso de edición de la fila.
 
 Estado: punto 33 validado mediante los resultados de la prueba indicada. Avance de Unidad 1: 33/41 completados; faltan 8 puntos (34 a 41).
+
+## Punto 34 — Menú Etiquetas de propiedad
+
+Avance de Unidad 1: 33/41 completados; punto 34/41 preparado para prueba. Faltan 8 por validar, incluido este.
+
+Se agrega real_estate_menu_property_tags en real_estate_menuitem.xml, con nombre Etiquetas de propiedad, padre real_estate_menu_settings y acción estate_property_tag_action. La secuencia 20 lo ubica después de Tipos de propiedad. El manifiesto ya carga la acción de etiquetas antes de los menús.
+
+Estado: XML y referencia del menú verificados; prueba visual en Odoo pendiente. Actualizar el módulo, recargar y abrir Inmobiliaria → Ajustes → Etiquetas de propiedad. Debe mostrarse la lista con LUMINOSA.
+
+Apunte: el menuitem proporciona navegación y la acción determina el modelo y las vistas que se abren. Crear un menú no concede permisos sobre el modelo; se aplican las ACL definidas en el punto 32.
