@@ -765,3 +765,9 @@ Se crea views/estate_property_offer_views.xml con vista estate_property_offer_li
 No se crea una acción: las ofertas se mostrarán dentro de offer_ids en el formulario de su propiedad. Ese One2many permite acceder a las ofertas del registro padre sin un menú o acción independiente. El punto 41 incorporará la pestaña y permitirá probar creación de ofertas; Odoo vinculará las ofertas creadas desde esa colección mediante property_id.
 
 Para verificar la carga antes del punto 41: actualizar el módulo y consultar Ajustes → Técnico → Interfaz de usuario → Vistas. Buscar estate.property.offer.list; debe ser una vista de lista del modelo estate.property.offer. La prueba de uso y edición queda pendiente hasta incluir el campo en el formulario.
+
+### Validación de carga del punto 40
+
+La captura de Vistas muestra estate.property.offer.list, tipo List, modelo estate.property.offer e identificador externo real_estate.estate_property_offer_list_view. Se confirma la carga de la vista personalizada. Las columnas y editable="top" se verificaron en el XML; su uso se probará desde la propiedad en el punto 41.
+
+Estado: carga de la vista del punto 40 validada en Odoo. Avance de Unidad 1: 40/41 completados; falta 1 punto (41).
