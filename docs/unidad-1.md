@@ -733,3 +733,19 @@ Para validar carga: actualizar el módulo y buscar estate.property.offer en Ajus
 La captura de Access Rights muestra estate.property.offer.manager sobre Oferta sobre propiedad con lectura, escritura, creación y borrado marcados. estate.property.offer.salesman tiene únicamente lectura. Se confirma la carga y configuración de ambas ACL; la prueba de operaciones con usuarios de cada grupo queda para cuando las ofertas estén visibles en la propiedad.
 
 Estado: configuración del punto 38 validada visualmente en Odoo. Avance de Unidad 1: 38/41 completados; faltan 3 puntos (39 a 41).
+
+## Punto 39 — Ofertas como One2many
+
+Avance: 38/41 completados; punto 39/41 preparado. Faltan 3 por validar, incluido este.
+
+Se agrega offer_ids como fields.One2many(comodel_name="estate.property.offer", inverse_name="property_id", string="Ofertas"). Sintaxis y configuración verificadas. Se usa el nombre técnico estate.property.offer con puntos: estate_property_offer que aparece en el ejemplo de la guía corresponde al nombre habitual de la tabla, no al _name del modelo creado en el punto 37.
+
+### ¿Por qué inverse_name?
+
+property_id es el Many2one definido en cada oferta que identifica su propiedad. El One2many necesita ese nombre para reunir las ofertas cuyo property_id apunta a la propiedad actual. Ejemplo: si dos ofertas apuntan a Casa Lanús, ambas aparecen en offer_ids de Casa Lanús. Cada oferta pertenece a una propiedad y una propiedad puede reunir varias ofertas.
+
+### ¿Qué significa que sea una relación virtual?
+
+En esta relación normal, offer_ids no guarda una lista de IDs en una columna de estate_property. El enlace persistente está en property_id de la tabla estate_property_offer. El ORM obtiene la colección inversa a partir de ese enlace. Virtual no significa que las ofertas sean temporales ni que se pierdan: son registros persistentes, y el ORM permite crear o modificar la colección mediante operaciones relacionales.
+
+Validación: actualizar real_estate y revisar Campos de estate.property. offer_ids debe mostrar etiqueta Ofertas y tipo one2many; su modelo relacionado debe ser estate.property.offer y el inverso property_id. Su presentación y uso se incorporan en los puntos 40 y 41.
