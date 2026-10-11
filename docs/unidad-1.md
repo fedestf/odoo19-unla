@@ -771,3 +771,13 @@ Para verificar la carga antes del punto 41: actualizar el módulo y consultar Aj
 La captura de Vistas muestra estate.property.offer.list, tipo List, modelo estate.property.offer e identificador externo real_estate.estate_property_offer_list_view. Se confirma la carga de la vista personalizada. Las columnas y editable="top" se verificaron en el XML; su uso se probará desde la propiedad en el punto 41.
 
 Estado: carga de la vista del punto 40 validada en Odoo. Avance de Unidad 1: 40/41 completados; falta 1 punto (41).
+
+## Punto 41 — Ofertas dentro de la propiedad
+
+Avance: 40/41 completados; último punto preparado para prueba. Falta validar el 41.
+
+Se agrega al notebook del formulario una página Ofertas con el campo offer_ids. XML y posición de la nueva página verificados. El One2many muestra las ofertas vinculadas a la propiedad y utiliza la vista de lista del punto 40, con Precio, Ofertante y Estado y edición en línea.
+
+Validación: actualizar real_estate y abrir una propiedad de prueba guardada como Manager. En Ofertas, usar Add a line, completar precio 50000 y seleccionar un contacto como Ofertante; dejar Estado vacío para una oferta pendiente. Guardar la propiedad, volver a la lista y reabrirla. La oferta debe conservarse en esa propiedad. El inverso property_id se establece al crear desde offer_ids. Crear una oferta no cambia automáticamente el state de la propiedad en esta etapa; esa lógica se abordará en ejercicios posteriores.
+
+Apunte: la colección pertenece al formulario padre, pero las ofertas son registros del modelo estate.property.offer. La interfaz envía operaciones relacionales al ORM, que crea o modifica esos registros y conserva el enlace mediante property_id. La pestaña organiza la vista y no concede permisos: se aplican las ACL de ofertas del punto 38.
