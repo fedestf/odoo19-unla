@@ -148,3 +148,13 @@ Se agregan validity Integer con etiqueta Validez (días) y default=7, y date_dea
 En este punto ambos son campos normales independientes: ingresar días no calcula aún la fecha ni ingresar fecha modifica los días. Esa relación compute/inverse corresponde al punto 10. Date no contiene hora y validity expresa una cantidad de días, no una fecha.
 
 Validación: actualizar, abrir Ofertas de una propiedad y comprobar ambas columnas. Add a line debe abrir formulario con Validez 7 y Fecha límite vacía. Completar precio y ofertante, ingresar una fecha manual y guardar el formulario y la propiedad. Verificar que días y fecha se conservan en la fila. Puede descartarse la oferta nueva si solo se quiere inspeccionar los valores iniciales.
+
+### Validación del punto 9
+
+La captura confirma Validez 7 y Fecha límite vacía en ambas ofertas. Avance actual: 9/27 completados; faltan 18. Los avances anteriores del documento son registros históricos.
+
+## Punto 10 — Fecha límite con compute e inverse
+
+Código subido: fecha límite = fecha de creación + validez en días. Para ofertas aún no guardadas se usa la fecha actual del usuario. La inversa modifica validity según la diferencia entre la fecha límite ingresada y la fecha base; el ajuste se comprueba al guardar y reabrir. Se declaran dependencias create_date y validity. No se almacena el resultado ni se modifica create_date. Las ofertas antiguas usan su fecha de creación original.
+
+Pruebas aisladas correctas: base 11/10/2026 y validez 7 producen 18/10/2026; ingresar 25/10/2026 produce validez 14. Pendiente probar en Odoo: crear oferta con validez 10, guardar y luego mover fecha límite tres días adelante. Guardar y reabrir: debe tener validez 13. Compute calcula el resultado desde las entradas; inverse ajusta una entrada cuando se edita el resultado. Al borrar la fecha se conserva validity y se recalcula desde esa duración.
