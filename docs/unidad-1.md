@@ -691,3 +691,9 @@ Se agrega tag_ids debajo del título name en el formulario y como segunda column
 Apunte: Many2many define la relación; many2many_tags es el widget que muestra los registros vinculados como etiquetas compactas y permite seleccionarlos en un formulario editable. Cambiar el widget modifica su presentación, no la cardinalidad ni los permisos. Sin este widget, el formulario usa la presentación relacional predeterminada, normalmente una lista de registros relacionados.
 
 Para validar: actualizar el módulo, abrir una propiedad como Manager, seleccionar LUMINOSA debajo del título, guardar y reabrir. Volver a la lista y comprobar la columna Etiquetas. Para ejercitar la relación múltiple, crear ESPACIOSA en Ajustes → Etiquetas de propiedad y asignar ambas a una misma propiedad; usar LUMINOSA en otra comprueba que se comparte el mismo registro de etiqueta. La comparación visual sin widget solicitada en la nota queda pendiente si no se realiza en el entorno de práctica.
+
+### Comprobación de lista del punto 36
+
+La captura muestra la columna Etiquetas como segunda columna y LUMINOSA presentada como etiqueta compacta en Casa Lanús. Se confirma la asociación guardada y su presentación en la lista mediante many2many_tags. Falta la captura del formulario para validar visualmente la ubicación debajo del título.
+
+Avance: 35/41 completados; punto 36 parcialmente validado. Faltan 6 por cerrar, incluido el 36.
