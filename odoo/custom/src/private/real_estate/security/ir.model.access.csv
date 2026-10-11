@@ -5,3 +5,5 @@ access_estate_property_type_salesman,estate.property.type.salesman,model_estate_
 access_estate_property_type_manager,estate.property.type.manager,model_estate_property_type,real_estate.group_estate_property_manager,1,1,1,1
 access_estate_property_tag_manager,estate.property.tag.manager,model_estate_property_tag,real_estate.group_estate_property_manager,1,1,1,1
 access_estate_property_tag_salesman,estate.property.tag.salesman,model_estate_property_tag,real_estate.group_estate_property_salesman,1,0,0,0
+access_estate_property_offer_manager,estate.property.offer.manager,model_estate_property_offer,real_estate.group_estate_property_manager,1,1,1,1
+access_estate_property_offer_salesman,estate.property.offer.salesman,model_estate_property_offer,real_estate.group_estate_property_salesman,1,0,0,0
