@@ -629,3 +629,13 @@ Apunte de estudio: las columnas perm_read, perm_write, perm_create y perm_unlink
 La captura de Access Rights filtrada por estate.property.tag muestra estate.property.tag.manager sobre Etiqueta de propiedad con lectura, escritura, creación y borrado marcados. La regla estate.property.tag.salesman tiene únicamente lectura marcada.
 
 Estado: carga y configuración de permisos del punto 32 validadas visualmente en Odoo. La prueba de operaciones con usuarios de cada grupo queda para cuando se incorporen la acción y el menú de etiquetas.
+
+## Punto 33 — Listas editables de etiquetas y tipos
+
+Avance de Unidad 1: 32/41 puntos validados; punto 33/41 preparado para prueba. Quedan 9 por validar, incluido el punto 33. Tras validarlo quedarán 8. Se mostrará el progreso por unidad en los mensajes siguientes.
+
+Se crea estate_property_tag_views.xml con acción Etiquetas de propiedad para estate.property.tag, view_mode list, y vista personalizada con name y editable="top". Se declara el archivo en el manifiesto antes de los menús. La acción de tipos cambia de list,form a list y se incorpora su lista personalizada con name y editable="top". XML y configuración de ambas acciones verificados; prueba en Odoo pendiente.
+
+editable="top" permite crear y editar en las filas de la lista, colocando las nuevas arriba. No concede permisos: Manager puede editar y Vendedor solo leer según sus ACL. El menú de etiquetas se agregará en el punto 34.
+
+Para validar: actualizar y abrir /odoo/action-real_estate.estate_property_tag_action como Manager, crear Luminosa desde New y guardar. En Ajustes → Tipos de propiedad, crear Departamento de la misma manera. Debe conservarse Casa. Comprobar que ambos registros se crean sin abrir formulario.
