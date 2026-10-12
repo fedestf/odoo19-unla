@@ -1,6 +1,6 @@
 # Unidad 2 — Guía de estudio
 
-Esta unidad tiene 27 puntos. Avance actual: 11/27 validados; punto 12 preparado. La Unidad 1 se documenta en unidad-1.md.
+Esta unidad tiene 27 puntos. Avance actual: 12/27 validados; punto 13 preparado. La Unidad 1 se documenta en unidad-1.md.
 
 ## Punto 1 — Superficie total computada
 
@@ -180,3 +180,17 @@ Avance: 11/27 completados; faltan 16.
 Se agregan formulario personalizado con los siete campos de oferta, vista de búsqueda y acción Ofertas con list,form. En Inmobiliaria → Anuncios se agrega Ofertas después de Propiedades. La búsqueda permite agrupar por property_type_id; al ser un relacionado almacenado se puede usar para agrupación de base de datos. Se conserva la lista existente y su uso dentro de propiedades.
 
 Estado: XML, formulario, contexto de agrupación y menú verificados; navegación en Odoo pendiente. Actualizar, abrir Anuncios → Ofertas y usar Agrupar por → Tipo de propiedad. Abrir una fila debe mostrar Precio, Ofertante, Propiedad, Tipo Propiedad, Estado, Validez y Fecha límite. Los grupos solo aparecen si tienen ofertas; propiedades sin tipo se agrupan bajo un valor vacío. Las ACL se mantienen para Manager y Vendedor.
+
+### Validación del punto 12
+
+Las capturas muestran agrupación por Tipo de propiedad con tres ofertas y suma 231111, y formulario propio con Precio, Ofertante, Propiedad, Tipo Propiedad, Estado, Validez y Fecha límite. Se confirma navegación, agrupación y formulario. Avance: 12/27; faltan 15.
+
+## Punto 13 — Onchange del jardín
+
+Se agrega @api.onchange("garden") sobre _onchange_garden. Al marcar garden se asigna garden_area=10; al desmarcar se asigna 0. Sintaxis y método aislado comprobados en ambos sentidos. No altera automáticamente registros existentes durante la actualización.
+
+Apunte: onchange responde a cambios en el formulario y ajusta sus valores antes de guardar. No equivale a una regla de negocio ejecutada siempre por create/write: operaciones externas al formulario pueden no ejecutarlo. El usuario puede modificar la superficie propuesta después. Los cambios se persisten al guardar; descartarlos conserva los valores anteriores.
+
+Prueba: actualizar, abrir propiedad de prueba, ir a Jardín y marcar el booleano (si ya está marcado, desmarcar y volver a marcar). La superficie debe ser 10. Desmarcar debe poner 0. Guardar y reabrir comprueba persistencia. Superficie total debe actualizarse por api.depends al cambiar garden_area. Con cubierta 130: jardín marcado da total 140 y desmarcado 130.
+
+Estado: punto 13 preparado para validación.
