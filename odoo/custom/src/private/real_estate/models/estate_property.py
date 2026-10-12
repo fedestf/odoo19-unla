@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 
 
 class EstateProperty(models.Model):
@@ -97,3 +97,16 @@ class EstateProperty(models.Model):
     def _onchange_garden(self):
         for property_record in self:
             property_record.garden_area = 10 if property_record.garden else 0
+
+    @api.onchange("expected_price")
+    def _onchange_expected_price(self):
+        if self.expected_price < 10000:
+            return {
+                "warning": {
+                    "title": _("Precio esperado bajo"),
+                    "message": _(
+                        "El precio esperado es menor que 10.000. "
+                        "Revisá el importe por si hubo un error de tipeo."
+                    ),
+                }
+            }
