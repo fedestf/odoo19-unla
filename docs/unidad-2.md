@@ -1,6 +1,6 @@
 # Unidad 2 — Guía de estudio
 
-Esta unidad tiene 27 puntos. Avance actual: 12/27 validados; punto 13 preparado. La Unidad 1 se documenta en unidad-1.md.
+Esta unidad tiene 27 puntos. Avance actual: 13/27 validados; punto 14 preparado. La Unidad 1 se documenta en unidad-1.md.
 
 ## Punto 1 — Superficie total computada
 
@@ -194,3 +194,17 @@ Apunte: onchange responde a cambios en el formulario y ajusta sus valores antes 
 Prueba: actualizar, abrir propiedad de prueba, ir a Jardín y marcar el booleano (si ya está marcado, desmarcar y volver a marcar). La superficie debe ser 10. Desmarcar debe poner 0. Guardar y reabrir comprueba persistencia. Superficie total debe actualizarse por api.depends al cambiar garden_area. Con cubierta 130: jardín marcado da total 140 y desmarcado 130.
 
 Estado: punto 13 preparado para validación.
+
+### Validación del punto 13
+
+Las capturas de Casa Lanús muestran Jardín marcado con Superficie jardín 10 y desmarcado con superficie 0. Se confirma el comportamiento de onchange en ambos sentidos siguiendo la prueba indicada. No se infiere persistencia tras reapertura de estos recortes.
+
+Avance: 13/27 completados; faltan 14.
+
+## Punto 14 — Advertencia de precio esperado bajo
+
+Se agrega _onchange_expected_price con @api.onchange("expected_price"). Cuando el importe es menor que 10000 retorna warning con título y mensaje de revisión por posible error de tipeo. Se importa _ para textos traducibles. No lanza excepción ni bloquea guardar.
+
+Apunte: una advertencia de onchange informa durante la edición del formulario. No es una restricción de base de datos ni una validación obligatoria para llamadas externas al ORM. El umbral es estricto: 9999 y 0 advierten; 10000 y 15000 no. Al abrir una propiedad con 0 no se garantiza aviso hasta que cambie el campo. No se incorpora wdb.set_trace: la nota de depuración es opcional y detendría la petición hasta intervenir.
+
+Estado: sintaxis y método aislado verificados con los cuatro importes anteriores; prueba UI pendiente. Actualizar, cambiar Precio esperado a 9000, salir del campo y capturar la advertencia. Cerrarla y guardar comprueba que no bloquea. Cambiar a 10000 no debe advertir. Reabrir comprueba persistencia del importe guardado.
