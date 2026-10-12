@@ -1,4 +1,5 @@
 from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 
 class EstateProperty(models.Model):
@@ -110,3 +111,15 @@ class EstateProperty(models.Model):
                     ),
                 }
             }
+
+    def action_cancel(self):
+        if any(property_record.state == "sold" for property_record in self):
+            raise UserError(_("No se puede cancelar una propiedad vendida."))
+        self.write({"state": "canceled"})
+        return True
+
+    def action_sold(self):
+        if any(property_record.state == "canceled" for property_record in self):
+            raise UserError(_("No se puede marcar como vendida una propiedad cancelada."))
+        self.write({"state": "sold"})
+        return True
