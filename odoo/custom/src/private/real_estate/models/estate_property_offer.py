@@ -48,3 +48,10 @@ class EstatePropertyOffer(models.Model):
                 offer.validity = (
                     offer.date_deadline - offer._get_deadline_base_date()
                 ).days
+
+    property_type_id = fields.Many2one(
+        comodel_name="estate.property.type",
+        string="Tipo Propiedad",
+        related="property_id.property_type_id",
+        store=True,
+    )
