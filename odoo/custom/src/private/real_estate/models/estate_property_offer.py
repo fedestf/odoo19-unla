@@ -1,4 +1,5 @@
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 
 class EstatePropertyOffer(models.Model):
@@ -55,3 +56,18 @@ class EstatePropertyOffer(models.Model):
         related="property_id.property_type_id",
         store=True,
     )
+
+    def action_accept(self):
+        self.ensure_one()
+        property_record = self.property_id
+        if property_record.state in ("sold", "canceled"):
+            raise UserError(_("No se puede aceptar una oferta de una propiedad vendida o cancelada."))
+        other_offers = property_record.offer_ids - self
+        other_offers.write({"status": "refused"})
+        self.write({"status": "accepted"})
+        property_record.write({
+            "buyer_id": self.partner_id.id,
+            "selling_price": self.price,
+            "state": "offer_accepted",
+        })
+        return True
