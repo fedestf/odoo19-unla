@@ -1,6 +1,6 @@
 # Unidad 2 — Guía de estudio
 
-Esta unidad tiene 27 puntos. Avance: 0/27 validados; punto 1 preparado. La Unidad 1 se documenta en unidad-1.md.
+Esta unidad tiene 27 puntos. Avance actual: 10/27 validados; punto 11 preparado. La Unidad 1 se documenta en unidad-1.md.
 
 ## Punto 1 — Superficie total computada
 
@@ -158,3 +158,13 @@ La captura confirma Validez 7 y Fecha límite vacía en ambas ofertas. Avance ac
 Código subido: fecha límite = fecha de creación + validez en días. Para ofertas aún no guardadas se usa la fecha actual del usuario. La inversa modifica validity según la diferencia entre la fecha límite ingresada y la fecha base; el ajuste se comprueba al guardar y reabrir. Se declaran dependencias create_date y validity. No se almacena el resultado ni se modifica create_date. Las ofertas antiguas usan su fecha de creación original.
 
 Pruebas aisladas correctas: base 11/10/2026 y validez 7 producen 18/10/2026; ingresar 25/10/2026 produce validez 14. Pendiente probar en Odoo: crear oferta con validez 10, guardar y luego mover fecha límite tres días adelante. Guardar y reabrir: debe tener validez 13. Compute calcula el resultado desde las entradas; inverse ajusta una entrada cuando se edita el resultado. Al borrar la fecha se conserva validity y se recalcula desde esa duración.
+
+### Validación del punto 10 y avance al 11
+
+La oferta de Colleen Diaz muestra 7 días/19 de octubre, luego 10 días/22 de octubre y finalmente 13 días/25 de octubre tras editar la fecha. Se confirma cálculo e inversa. Avance: 10/27 completados; faltan 17.
+
+## Punto 11 — Tipo de propiedad relacionado y almacenado
+
+Se agrega property_type_id Many2one en la oferta con related="property_id.property_type_id" y store=True. El tipo se deriva de la propiedad; no se elige independientemente. Por defecto es de solo lectura. El ORM establece dependencias de la cadena relacionada. Almacenarlo permite disponer de su columna y agrupar por el tipo. No representa una copia histórica congelada.
+
+Sintaxis y definición verificadas; prueba en Odoo pendiente. Actualizar y revisar property_type_id en Campos de estate.property.offer, y su columna en pgweb. Asignar Casa al Tipo Propiedad de una propiedad con ofertas, guardar y abrir una oferta: el formulario automático debe mostrar Tipo Propiedad Casa. Cambiar el tipo de la propiedad a Departamento, guardar y reabrir la oferta permite comprobar propagación. Acción, menú y agrupación se incorporan en el punto 12.
