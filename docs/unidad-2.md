@@ -1,6 +1,6 @@
 # Unidad 2 — Guía de estudio
 
-Esta unidad tiene 27 puntos. Avance actual: 10/27 validados; punto 11 preparado. La Unidad 1 se documenta en unidad-1.md.
+Esta unidad tiene 27 puntos. Avance actual: 11/27 validados; punto 12 preparado. La Unidad 1 se documenta en unidad-1.md.
 
 ## Punto 1 — Superficie total computada
 
@@ -168,3 +168,15 @@ La oferta de Colleen Diaz muestra 7 días/19 de octubre, luego 10 días/22 de oc
 Se agrega property_type_id Many2one en la oferta con related="property_id.property_type_id" y store=True. El tipo se deriva de la propiedad; no se elige independientemente. Por defecto es de solo lectura. El ORM establece dependencias de la cadena relacionada. Almacenarlo permite disponer de su columna y agrupar por el tipo. No representa una copia histórica congelada.
 
 Sintaxis y definición verificadas; prueba en Odoo pendiente. Actualizar y revisar property_type_id en Campos de estate.property.offer, y su columna en pgweb. Asignar Casa al Tipo Propiedad de una propiedad con ofertas, guardar y abrir una oferta: el formulario automático debe mostrar Tipo Propiedad Casa. Cambiar el tipo de la propiedad a Departamento, guardar y reabrir la oferta permite comprobar propagación. Acción, menú y agrupación se incorporan en el punto 12.
+
+### Validación del punto 11
+
+La segunda captura muestra Tipo Propiedad DEPARTAMENTO de solo lectura en el formulario de la oferta. Se confirma presentación del relacionado después de asignar ese tipo a la propiedad siguiendo la prueba indicada. La primera captura no muestra el campo; no se considera evidencia del valor Casa. El almacenamiento se verificó en el código, sin captura de pgweb.
+
+Avance: 11/27 completados; faltan 16.
+
+## Punto 12 — Todas las ofertas y agrupación por tipo
+
+Se agregan formulario personalizado con los siete campos de oferta, vista de búsqueda y acción Ofertas con list,form. En Inmobiliaria → Anuncios se agrega Ofertas después de Propiedades. La búsqueda permite agrupar por property_type_id; al ser un relacionado almacenado se puede usar para agrupación de base de datos. Se conserva la lista existente y su uso dentro de propiedades.
+
+Estado: XML, formulario, contexto de agrupación y menú verificados; navegación en Odoo pendiente. Actualizar, abrir Anuncios → Ofertas y usar Agrupar por → Tipo de propiedad. Abrir una fila debe mostrar Precio, Ofertante, Propiedad, Tipo Propiedad, Estado, Validez y Fecha límite. Los grupos solo aparecen si tienen ofertas; propiedades sin tipo se agrupan bajo un valor vacío. Las ACL se mantienen para Manager y Vendedor.
