@@ -34,4 +34,7 @@
         action="estate_property_tag_action"
         sequence="20"
     />
+    <menuitem id="real_estate_menu_offers" name="Ofertas"
+        parent="real_estate_menu_announcements"
+        action="estate_property_offer_action" sequence="20"/>
 </odoo>
