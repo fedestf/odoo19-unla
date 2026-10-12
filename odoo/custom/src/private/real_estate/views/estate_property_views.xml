@@ -6,7 +6,9 @@
         <field name="arch" type="xml">
             <form string="Propiedad">
                 <header>
-                    <field name="state" widget="statusbar" options="{'clickable': True}"/>
+                    <button name="action_cancel" type="object" string="Cancelar"/>
+                    <button name="action_sold" type="object" string="Marcar como vendida"/>
+                    <field name="state" widget="statusbar" options="{'clickable': False}"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
