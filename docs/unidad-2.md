@@ -1,6 +1,6 @@
 # Unidad 2 — Guía de estudio
 
-Esta unidad tiene 27 puntos. Avance actual: 13/27 validados; punto 14 preparado. La Unidad 1 se documenta en unidad-1.md.
+Esta unidad tiene 27 puntos. Avance actual: 14/27 validados; punto 15 preparado. La Unidad 1 se documenta en unidad-1.md.
 
 ## Punto 1 — Superficie total computada
 
@@ -208,3 +208,19 @@ Se agrega _onchange_expected_price con @api.onchange("expected_price"). Cuando e
 Apunte: una advertencia de onchange informa durante la edición del formulario. No es una restricción de base de datos ni una validación obligatoria para llamadas externas al ORM. El umbral es estricto: 9999 y 0 advierten; 10000 y 15000 no. Al abrir una propiedad con 0 no se garantiza aviso hasta que cambie el campo. No se incorpora wdb.set_trace: la nota de depuración es opcional y detendría la petición hasta intervenir.
 
 Estado: sintaxis y método aislado verificados con los cuatro importes anteriores; prueba UI pendiente. Actualizar, cambiar Precio esperado a 9000, salir del campo y capturar la advertencia. Cerrarla y guardar comprueba que no bloquea. Cambiar a 10000 no debe advertir. Reabrir comprueba persistencia del importe guardado.
+
+### Validación del punto 14
+
+La captura muestra el aviso Precio esperado bajo con el mensaje previsto. La captura anterior mostraba precio 9000 guardado, compatible con su carácter no bloqueante. El aviso aparece al modificar el campo y salir de él. La ausencia de aviso a 10000 se verificó en el método aislado, no mediante captura UI.
+
+Avance: 14/27 completados; faltan 13.
+
+## Punto 15 — Botones Cancelar y Marcar como vendida
+
+Se agregan botones type=object en el header, vinculados a action_cancel y action_sold. Los métodos revisan todos los registros antes de escribir: cancelar una propiedad sold lanza UserError; vender una propiedad canceled también. Se permite repetir el mismo estado. Las escrituras respetan ACL. No se agregan condiciones adicionales sobre ofertas aceptadas en esta etapa.
+
+Se deshabilita el clic manual en la barra de estado, habilitado temporalmente en Unidad 1 para probar filtros: ahora la interfaz usa los botones con validación. Esto no equivale a bloquear toda escritura externa sobre state; los métodos validan estas acciones. Las reglas generales futuras deberán implementarse cuando la guía las solicite.
+
+Apunte: type=object invoca un método Python. UserError informa al usuario y aborta la operación, a diferencia de warning en onchange. Los métodos comprueban la condición antes de cambiar estado para evitar modificaciones parciales dentro de una llamada.
+
+Estado: sintaxis, XML y métodos aislados verificados para nuevas→vendidas, nuevas→canceladas y ambos cruces bloqueados. Prueba Odoo pendiente: usar dos propiedades nuevas de prueba; cancelar una e intentar venderla, vender la otra e intentar cancelarla. Deben mostrarse errores y conservarse sus estados. No reutilizar una propiedad con datos que se quieran mantener editables en su estado actual, ya que esta interfaz no incluye un botón para volver a Nuevo.
