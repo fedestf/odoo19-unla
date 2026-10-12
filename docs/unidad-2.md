@@ -1,6 +1,6 @@
 # Unidad 2 — Guía de estudio
 
-Esta unidad tiene 27 puntos. Avance actual: 14/27 validados; punto 15 preparado. La Unidad 1 se documenta en unidad-1.md.
+Esta unidad tiene 27 puntos. Avance actual: 15/27 validados; punto 16 preparado. La Unidad 1 se documenta en unidad-1.md.
 
 ## Punto 1 — Superficie total computada
 
@@ -224,3 +224,15 @@ Se deshabilita el clic manual en la barra de estado, habilitado temporalmente en
 Apunte: type=object invoca un método Python. UserError informa al usuario y aborta la operación, a diferencia de warning en onchange. Los métodos comprueban la condición antes de cambiar estado para evitar modificaciones parciales dentro de una llamada.
 
 Estado: sintaxis, XML y métodos aislados verificados para nuevas→vendidas, nuevas→canceladas y ambos cruces bloqueados. Prueba Odoo pendiente: usar dos propiedades nuevas de prueba; cancelar una e intentar venderla, vender la otra e intentar cancelarla. Deben mostrarse errores y conservarse sus estados. No reutilizar una propiedad con datos que se quieran mantener editables en su estado actual, ya que esta interfaz no incluye un botón para volver a Nuevo.
+
+### Validación de botones del punto 15
+
+Ambas capturas muestran los UserError previstos: una cancelada no puede venderse y una vendida no puede cancelarse. La continuación de la consigna pide además web_ribbon Vendida; se incorpora ahora y falta su comprobación visual. Avance: 15/27 en el recorrido; la cinta complementaria queda pendiente.
+
+## Punto 16 — Aceptar una oferta
+
+Se agrega botón Aceptar en cada fila de la lista. action_accept exige un registro, rechaza las otras ofertas de la propiedad, acepta la elegida y asigna comprador, precio de venta y estado offer_accepted a la propiedad. Se conservan ACL y no se usa sudo. Se impide aceptar en propiedades sold o canceled para respetar sus estados finales. Puede elegirse otra oferta de una propiedad con oferta aceptada, reemplazando la anterior y rechazándola.
+
+Apunte: property_record.offer_ids - self obtiene las demás ofertas mediante diferencia de recordsets. write actualiza sus campos; los cambios forman parte de la transacción de la petición. ensure_one evita aceptar ambiguamente varias ofertas a la vez. El comprador se toma de partner_id y el precio de price, no del mayor importe calculado por best_offer: se puede elegir cualquier oferta permitida por esta etapa.
+
+Estado: sintaxis y XML verificados; comportamiento ORM pendiente. Actualizar, abrir una propiedad de prueba en Nuevo u Oferta recibida con al menos dos ofertas y pulsar Aceptar en una. Verificar elegida Aceptada, restantes Rechazadas, propiedad Oferta aceptada, precio de venta igual al elegido y Comprador correcto en Más info. La propiedad Prueba venta debe mostrar la cinta Vendida al abrirla, para completar la comprobación del punto 15.
