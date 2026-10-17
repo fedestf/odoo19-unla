@@ -8,6 +8,11 @@
                 <header>
                     <button name="action_cancel" type="object" string="Cancelar"/>
                     <button name="action_sold" type="object" string="Marcar como vendida"/>
+                    <button name="action_generate_offer" type="object" string="Generar oferta automática"
+                        invisible="state not in ['new', 'offer_received']"/>
+                    <button name="action_clear_tags" type="object" string="Sacar etiquetas"/>
+                    <button name="action_load_all_tags" type="object" string="Cargar todas las etiquetas"/>
+                    <button name="action_add_brand_new_tag" type="object" string="A estrenar"/>
                     <field name="state" widget="statusbar" options="{'clickable': False}"/>
                 </header>
                 <sheet>
@@ -56,6 +61,9 @@
                             </group>
                         </page>
                         <page string="Ofertas" name="offers">
+                            <group>
+                                <field name="offer_partner_ids" widget="many2many_tags" readonly="1"/>
+                            </group>
                             <field name="offer_ids"/>
                         </page>
                     </notebook>

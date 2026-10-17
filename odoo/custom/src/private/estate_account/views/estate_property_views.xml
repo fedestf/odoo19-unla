@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="estate_property_form_inherit_invoice" model="ir.ui.view">
+        <field name="name">estate.property.form.invoice</field>
+        <field name="model">estate.property</field>
+        <field name="inherit_id" ref="real_estate.estate_property_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='more_info']/group" position="inside">
+                <field name="invoice_id" readonly="1" groups="account.group_account_invoice"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

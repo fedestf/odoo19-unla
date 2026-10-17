@@ -1,6 +1,6 @@
 # Unidad 2 — Guía de estudio
 
-Esta unidad tiene 27 puntos. Avance actual: 15/27 validados; punto 16 preparado. La Unidad 1 se documenta en unidad-1.md.
+Esta unidad tiene 27 puntos. Avance: 27/27 puntos implementados; 15/27 validados con capturas. Pruebas finales de los puntos 16 a 27 pendientes en la VM. La Unidad 1 se documenta en unidad-1.md.
 
 ## Punto 1 — Superficie total computada
 
@@ -236,3 +236,45 @@ Se agrega botón Aceptar en cada fila de la lista. action_accept exige un regist
 Apunte: property_record.offer_ids - self obtiene las demás ofertas mediante diferencia de recordsets. write actualiza sus campos; los cambios forman parte de la transacción de la petición. ensure_one evita aceptar ambiguamente varias ofertas a la vez. El comprador se toma de partner_id y el precio de price, no del mayor importe calculado por best_offer: se puede elegir cualquier oferta permitida por esta etapa.
 
 Estado: sintaxis y XML verificados; comportamiento ORM pendiente. Actualizar, abrir una propiedad de prueba en Nuevo u Oferta recibida con al menos dos ofertas y pulsar Aceptar en una. Verificar elegida Aceptada, restantes Rechazadas, propiedad Oferta aceptada, precio de venta igual al elegido y Comprador correcto en Más info. La propiedad Prueba venta debe mostrar la cinta Vendida al abrirla, para completar la comprobación del punto 15.
+
+## Cierre de implementación de la Unidad 2
+
+Se completó el código de los puntos 17 a 27 y se revisó su convivencia con el punto 16. El recorrido de implementación está en **27/27**; la validación visual del estudiante permanece en **15/27**. No se adjudican capturas ni resultados ORM que no se hayan obtenido.
+
+### Puntos 17 y 18 — Unicidad SQL
+
+Etiquetas y tipos usan UNIQUE(name). Ofertas usan UNIQUE(partner_id, property_id). En Odoo 19 se implementan con models.Constraint, equivalente al objetivo del _sql_constraints que muestra la guía anterior. Antes de actualizar se deben detectar duplicados existentes. No se eliminan ni renombran datos automáticamente.
+
+### Punto 19 — Colección de ofertantes
+
+offer_partner_ids es Many2many computado con offer_ids.mapped("partner_id"). La dependencia recorre los ofertantes de las ofertas. Un related no agrega correctamente una colección a través de un One2many para este caso; se calcula explícitamente. El campo se muestra en la pestaña Ofertas.
+
+### Punto 20 — Generación automática
+
+El botón elige un contacto activo sin oferta previa e importe aleatorio dentro del rango ±30% del precio esperado. También debe superar el máximo por la regla del punto 23. Se informa si no hay un contacto o precio posible; no se saltea la regla. Precio esperado debe ser positivo.
+
+### Punto 21 — Comandos de etiquetas
+
+Command.clear desvincula todas; Command.set carga todas las existentes; Command.link vincula A estrenar conservando las demás. La etiqueta se crea únicamente si no existe. Desvincular no borra el registro de etiqueta.
+
+### Punto 22 — Borrado de propiedades
+
+_unlink_if_new_or_cancelled usa api.ondelete(at_uninstall=False), para bloquear estados distintos de Nuevo/Cancelado sin impedir desinstalar el módulo. Esta condición no elimina las restricciones de FK: una propiedad con ofertas sigue protegida hasta que se resuelvan sus registros asociados.
+
+### Punto 23 — Herencia de create
+
+api.model_create_multi conserva la creación por lotes y super().create. Cada nueva oferta exige estado Nuevo/Oferta recibida y precio estrictamente mayor al máximo. Se consideran precios anteriores del mismo lote. Al crear se pasa la propiedad a Oferta recibida. Las ofertas antiguas se conservan; las nuevas reglas no borran historial.
+
+### Puntos 24 y 25 — Herencia de usuarios y vistas
+
+res.users se extiende con property_ids One2many inverso a salesman_id. Se hereda base.view_users_form y se agrega la página Propiedades de solo lectura. No hay modelo nuevo, por lo que no corresponde conceder nuevas ACL de usuarios indiscriminadamente; se conservan las existentes.
+
+### Puntos 26 y 27 — Módulo de facturación
+
+estate_account depende de real_estate y account. Extiende action_sold mediante super y genera una factura de cliente en borrador con comprador y dos líneas: propiedad (cantidad 1, precio de venta) y Gastos administrativos (cantidad 1, precio 100). Command.create se usa sobre invoice_line_ids, subconjunto de line_ids para facturas. Se necesita configuración contable y permisos de facturación. La factura vinculada aparece en Más info.; no se publica ni envía automáticamente, no se copia al duplicar y no se crea otra al repetir una venta ya completada en el flujo secuencial.
+
+### Validación y estudio final
+
+Se ejecutaron 10 pruebas aisladas sobre métodos reales con dobles del ORM, además de sintaxis Python/XML. Se prepararon 12 pruebas de integración para Odoo/PostgreSQL, pero no se ejecutaron aquí porque no hay Docker ni acceso a la VM. La factura real, restricciones físicas, vistas y permisos deben verificarse allí.
+
+[Instrucciones completas de instalación, precomprobación de datos, pruebas y conceptos finales](unidad-2-cierre.md). La documentación previa se conserva como historial de avance; sus contadores corresponden al momento de cada ejercicio.

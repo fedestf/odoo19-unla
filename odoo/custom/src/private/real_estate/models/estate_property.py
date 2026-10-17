@@ -1,4 +1,7 @@
-from odoo import _, api, fields, models
+import math
+import random
+
+from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -123,3 +126,62 @@ class EstateProperty(models.Model):
             raise UserError(_("No se puede marcar como vendida una propiedad cancelada."))
         self.write({"state": "sold"})
         return True
+
+    offer_partner_ids = fields.Many2many(
+        comodel_name="res.partner",
+        string="Ofertantes",
+        compute="_compute_offer_partner_ids",
+    )
+
+    @api.depends("offer_ids.partner_id")
+    def _compute_offer_partner_ids(self):
+        for property_record in self:
+            property_record.offer_partner_ids = property_record.offer_ids.mapped("partner_id")
+
+    def action_generate_offer(self):
+        self.ensure_one()
+        if self.state not in ("new", "offer_received"):
+            raise UserError(_("Solo se pueden generar ofertas para propiedades nuevas o con ofertas recibidas."))
+        if self.expected_price <= 0:
+            raise UserError(_("Ingresá un precio esperado positivo antes de generar una oferta."))
+        contacts = self.env["res.partner"].search([
+            ("active", "=", True),
+            ("id", "not in", self.offer_partner_ids.ids),
+        ])
+        if not contacts:
+            raise UserError(_("No quedan contactos activos que no hayan ofertado por esta propiedad."))
+        # Precios en centavos: respetar tanto el rango como el máximo vigente.
+        lower = max(
+            math.ceil(self.expected_price * 0.70 * 100),
+            math.floor(self.best_offer * 100) + 1,
+        )
+        upper = math.floor(self.expected_price * 1.30 * 100)
+        if lower > upper:
+            raise UserError(_("No hay un precio dentro del rango ±30% que supere la mejor oferta actual."))
+        self.env["estate.property.offer"].create({
+            "property_id": self.id,
+            "partner_id": random.choice(contacts.ids),
+            "price": random.randint(lower, upper) / 100,
+        })
+        return True
+
+    def action_clear_tags(self):
+        self.write({"tag_ids": [Command.clear()]})
+        return True
+
+    def action_load_all_tags(self):
+        tags = self.env["estate.property.tag"].search([])
+        self.write({"tag_ids": [Command.set(tags.ids)]})
+        return True
+
+    def action_add_brand_new_tag(self):
+        tag = self.env["estate.property.tag"].search([("name", "=", "A estrenar")], limit=1)
+        if not tag:
+            tag = self.env["estate.property.tag"].create({"name": "A estrenar"})
+        self.write({"tag_ids": [Command.link(tag.id)]})
+        return True
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_if_new_or_cancelled(self):
+        if any(record.state not in ("new", "canceled") for record in self):
+            raise UserError(_("Solo se pueden borrar propiedades nuevas o canceladas."))

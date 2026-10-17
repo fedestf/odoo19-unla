@@ -6,6 +6,11 @@ class EstatePropertyOffer(models.Model):
     _name = "estate.property.offer"
     _description = "Oferta sobre propiedad"
 
+    _unique_partner_property = models.Constraint(
+        "UNIQUE(partner_id, property_id)",
+        "Un mismo ofertante solo puede tener una oferta por propiedad.",
+    )
+
     price = fields.Float(string="Precio", required=True)
     status = fields.Selection(
         selection=[
@@ -71,3 +76,28 @@ class EstatePropertyOffer(models.Model):
             "state": "offer_accepted",
         })
         return True
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        vals_list = [dict(values) for values in vals_list]
+        default_property = self.default_get(["property_id"]).get("property_id")
+        maxima = {}
+        properties = self.env["estate.property"]
+        for values in vals_list:
+            property_id = values.get("property_id") or default_property
+            property_record = self.env["estate.property"].browse(property_id).exists()
+            if not property_record:
+                raise UserError(_("La oferta debe estar vinculada a una propiedad existente."))
+            property_record.check_access("write")
+            if property_record.state not in ("new", "offer_received"):
+                raise UserError(_("Solo se pueden crear ofertas para propiedades nuevas o con ofertas recibidas."))
+            previous = maxima.get(property_record.id, property_record.best_offer)
+            price = float(values.get("price", 0.0))
+            if price <= previous:
+                raise UserError(_("La nueva oferta debe superar la mejor oferta actual: %(price)s.", price=previous))
+            values["property_id"] = property_record.id
+            maxima[property_record.id] = price
+            properties |= property_record
+        offers = super().create(vals_list)
+        properties.write({"state": "offer_received"})
+        return offers
