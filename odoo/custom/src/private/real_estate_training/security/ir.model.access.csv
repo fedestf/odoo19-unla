@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_assign_salesman_manager,assign.salesman.manager,model_estate_assign_salesman_wizard,real_estate.group_estate_property_manager,1,1,1,1
+access_training_snapshot_manager,training.snapshot.manager,model_estate_training_snapshot,real_estate.group_estate_property_manager,1,1,1,1

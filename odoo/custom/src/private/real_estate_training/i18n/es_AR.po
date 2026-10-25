@@ -1,0 +1,243 @@
+# Translation catalog for Real Estate Training.
+#. module: real_estate_training
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo 19.0\n"
+"Language: es_AR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: real_estate_training
+#: model_terms:ir.ui.view,arch_db:real_estate_training.view_assign_salesman_wizard_form
+msgid "Apply"
+msgstr "Aplicar"
+
+#. module: real_estate_training
+#: model:ir.model,name:real_estate_training.model_estate_assign_salesman_wizard
+msgid "Assign property salesperson"
+msgstr "Asignación de vendedor de propiedades"
+
+#. module: real_estate_training
+#: model:ir.actions.act_window,name:real_estate_training.action_assign_salesman_wizard
+#: model_terms:ir.ui.view,arch_db:real_estate_training.view_assign_salesman_wizard_form
+#: model_terms:ir.ui.view,arch_db:real_estate_training.view_property_form_training
+msgid "Assign salesperson"
+msgstr "Asignar vendedor"
+
+#. module: real_estate_training
+#: model_terms:ir.ui.view,arch_db:real_estate_training.report_property_sheet
+msgid "Available from"
+msgstr "Disponible desde"
+
+#. module: real_estate_training
+#: model:ir.model.fields,field_description:real_estate_training.field_estate_training_snapshot__available_count
+msgid "Available properties"
+msgstr "Propiedades disponibles"
+
+#. module: real_estate_training
+#: model_terms:ir.ui.view,arch_db:real_estate_training.report_property_sheet
+msgid "Bedrooms"
+msgstr "Habitaciones"
+
+#. module: real_estate_training
+#: model_terms:ir.ui.view,arch_db:real_estate_training.report_property_sheet
+msgid "Bidder"
+msgstr "Ofertante"
+
+#. module: real_estate_training
+#: model_terms:ir.ui.view,arch_db:real_estate_training.report_property_sheet
+msgid "Buyer"
+msgstr "Comprador"
+
+#. module: real_estate_training
+#: model_terms:ir.ui.view,arch_db:real_estate_training.view_assign_salesman_wizard_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: real_estate_training
+#: model_terms:ir.ui.view,arch_db:real_estate_training.view_training_snapshot_list
+msgid "Capture today"
+msgstr "Generar resumen de hoy"
+
+#. module: real_estate_training
+#: model_terms:ir.ui.view,arch_db:real_estate_training.view_training_snapshot_form
+msgid "Daily snapshot"
+msgstr "Resumen diario"
+
+#. module: real_estate_training
+#: model:ir.actions.act_window,name:real_estate_training.action_training_snapshots
+#: model:ir.ui.menu,name:real_estate_training.menu_training_snapshots
+#: model_terms:ir.ui.view,arch_db:real_estate_training.view_training_snapshot_list
+msgid "Daily snapshots"
+msgstr "Resúmenes diarios"
+
+#. module: real_estate_training
+#: model:ir.model.fields,field_description:real_estate_training.field_estate_training_snapshot__capture_date
+msgid "Date"
+msgstr "Fecha"
+
+#. module: real_estate_training
+#: model_terms:ir.ui.view,arch_db:real_estate_training.report_property_sheet
+msgid "Deadline"
+msgstr "Fecha límite"
+
+#. module: real_estate_training
+#: model_terms:ir.ui.view,arch_db:real_estate_training.report_property_sheet
+msgid "Description"
+msgstr "Descripción"
+
+#. module: real_estate_training
+#: model_terms:ir.ui.view,arch_db:real_estate_training.report_property_sheet
+msgid "Expected price"
+msgstr "Precio esperado"
+
+#. module: real_estate_training
+#: model:ir.model.fields,field_description:real_estate_training.field_estate_training_snapshot__generated_at
+msgid "Last generated at"
+msgstr "Última generación"
+
+#. module: real_estate_training
+#: code:addons/real_estate_training/models/estate_property.py:0
+msgid "MailHog"
+msgstr "MailHog"
+
+#. module: real_estate_training
+#: model_terms:ir.ui.view,arch_db:real_estate_training.view_property_form_training
+msgid "MailHog test"
+msgstr "Prueba de MailHog"
+
+#. module: real_estate_training
+#: model_terms:ir.ui.view,arch_db:real_estate_training.report_property_sheet
+msgid "No offers registered."
+msgstr "No hay ofertas registradas."
+
+#. module: real_estate_training
+#: model:ir.model.fields,field_description:real_estate_training.field_estate_training_snapshot__offer_count
+#: model_terms:ir.ui.view,arch_db:real_estate_training.report_property_sheet
+msgid "Offers"
+msgstr "Ofertas"
+
+#. module: real_estate_training
+#: code:addons/real_estate_training/models/snapshot.py:0
+msgid "Only property managers can capture a snapshot."
+msgstr "Solo los managers de propiedades pueden generar un resumen."
+
+#. module: real_estate_training
+#: code:addons/real_estate_training/models/estate_property.py:0
+msgid "Only property managers can perform this training action."
+msgstr "Solo los managers de propiedades pueden ejecutar esta acción de práctica."
+
+#. module: real_estate_training
+#: code:addons/real_estate_training/wizard/assign_salesman.py:0
+msgid "Only property managers can reassign properties."
+msgstr "Solo los managers de propiedades pueden reasignar propiedades."
+
+#. module: real_estate_training
+#: model:ir.model.fields,field_description:real_estate_training.field_estate_training_snapshot__pending_offer_count
+msgid "Pending offers"
+msgstr "Ofertas pendientes"
+
+#. module: real_estate_training
+#: model_terms:ir.ui.view,arch_db:real_estate_training.report_property_sheet
+msgid "Postcode"
+msgstr "Código postal"
+
+#. module: real_estate_training
+#: model_terms:ir.ui.view,arch_db:real_estate_training.report_property_sheet
+msgid "Price"
+msgstr "Precio"
+
+#. module: real_estate_training
+#: model:ir.model.fields,field_description:real_estate_training.field_estate_assign_salesman_wizard__property_ids
+#: model:ir.model.fields,field_description:real_estate_training.field_estate_training_snapshot__property_count
+msgid "Properties"
+msgstr "Propiedades"
+
+#. module: real_estate_training
+#: model:ir.actions.report,name:real_estate_training.action_report_property_training
+#: model_terms:ir.ui.view,arch_db:real_estate_training.report_property_sheet
+msgid "Property sheet"
+msgstr "Ficha de propiedad"
+
+#. module: real_estate_training
+#: model:ir.cron,name:real_estate_training.cron_daily_snapshot
+msgid "Real estate - Daily training snapshot"
+msgstr "Inmobiliaria - Resumen diario de práctica"
+
+#. module: real_estate_training
+#: model:ir.model,name:real_estate_training.model_estate_training_snapshot
+msgid "Real estate daily snapshot"
+msgstr "Resumen diario inmobiliario"
+
+#. module: real_estate_training
+#: model:ir.model.fields,field_description:real_estate_training.field_estate_assign_salesman_wizard__salesman_id
+#: model_terms:ir.ui.view,arch_db:real_estate_training.report_property_sheet
+msgid "Salesperson"
+msgstr "Vendedor"
+
+#. module: real_estate_training
+#: code:addons/real_estate_training/wizard/assign_salesman.py:0
+msgid "Select an active internal user as salesperson."
+msgstr "Seleccioná un usuario interno activo como vendedor."
+
+#. module: real_estate_training
+#: code:addons/real_estate_training/wizard/assign_salesman.py:0
+msgid "Select at least one property."
+msgstr "Seleccioná al menos una propiedad."
+
+#. module: real_estate_training
+#: model_terms:ir.ui.view,arch_db:real_estate_training.report_property_sheet
+msgid "Selling price"
+msgstr "Precio de venta"
+
+#. module: real_estate_training
+#: code:addons/real_estate_training/wizard/assign_salesman.py:0
+msgid "Sold or cancelled properties cannot be reassigned with this wizard."
+msgstr "Las propiedades vendidas o canceladas no pueden reasignarse con este asistente."
+
+#. module: real_estate_training
+#: model_terms:ir.ui.view,arch_db:real_estate_training.report_property_sheet
+msgid "State"
+msgstr "Estado"
+
+#. module: real_estate_training
+#: code:addons/real_estate_training/models/estate_property.py:0
+msgid "The test message was delivered to the local MailHog inbox."
+msgstr "El mensaje de prueba se entregó en la bandeja local de MailHog."
+
+#. module: real_estate_training
+#: code:addons/real_estate_training/models/estate_property.py:0
+msgid "The training mail server must use smtp:1025 (MailHog)."
+msgstr "El servidor de correo de práctica debe usar smtp:1025 (MailHog)."
+
+#. module: real_estate_training
+#: model:ir.model.constraint,message:real_estate_training.constraint_estate_training_snapshot_unique_capture_date
+msgid "There can only be one snapshot per day."
+msgstr "Solo puede existir un resumen por día."
+
+#. module: real_estate_training
+#: code:addons/real_estate_training/models/estate_property.py:0
+msgid "This is a local MailHog training message for the property:"
+msgstr "Este es un correo local de práctica en MailHog para la propiedad:"
+
+#. module: real_estate_training
+#: model_terms:ir.ui.view,arch_db:real_estate_training.report_property_sheet
+msgid "Total area"
+msgstr "Superficie total"
+
+#. module: real_estate_training
+#: model_terms:ir.ui.view,arch_db:real_estate_training.report_property_sheet
+msgid "Type"
+msgstr "Tipo"
+
+#. module: real_estate_training
+#: model:ir.mail_server,name:real_estate_training.mailhog_training_server
+msgid "Unit 3 - Local MailHog"
+msgstr "Unidad 3 - MailHog local"
+
+#. module: real_estate_training
+#: code:addons/real_estate_training/models/estate_property.py:0
+msgid "Unit 3 - MailHog test"
+msgstr "Unidad 3 - Prueba de MailHog"

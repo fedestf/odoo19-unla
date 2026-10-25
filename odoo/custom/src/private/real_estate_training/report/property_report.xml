@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_property_training" model="ir.actions.report">
+        <field name="name">Property sheet</field>
+        <field name="model">estate.property</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">real_estate_training.report_property_sheet</field>
+        <field name="report_file">real_estate_training.report_property_sheet</field>
+        <field name="binding_model_id" ref="real_estate.model_estate_property"/>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'Property - %s' % (object.name)</field>
+    </record>
+    <template id="report_property_sheet">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Property sheet</h2>
+                        <h3 t-field="o.name"/>
+                        <table class="table table-sm">
+                            <tbody>
+                                <tr><th>Type</th><td t-field="o.property_type_id"/><th>State</th><td t-field="o.state"/></tr>
+                                <tr><th>Postcode</th><td t-field="o.postcode"/><th>Available from</th><td t-field="o.date_availability"/></tr>
+                                <tr><th>Expected price</th><td t-field="o.expected_price"/><th>Selling price</th><td t-field="o.selling_price"/></tr>
+                                <tr><th>Bedrooms</th><td t-field="o.bedrooms"/><th>Total area</th><td t-field="o.total_area"/></tr>
+                                <tr><th>Salesperson</th><td t-field="o.salesman_id"/><th>Buyer</th><td t-field="o.buyer_id"/></tr>
+                            </tbody>
+                        </table>
+                        <h4>Description</h4>
+                        <p t-field="o.description"/>
+                        <h4>Offers</h4>
+                        <table t-if="o.offer_ids" class="table table-sm">
+                            <thead><tr><th>Bidder</th><th>Price</th><th>State</th><th>Deadline</th></tr></thead>
+                            <tbody>
+                                <tr t-foreach="o.offer_ids" t-as="offer">
+                                    <td t-field="offer.partner_id"/>
+                                    <td t-field="offer.price"/>
+                                    <td t-field="offer.status"/>
+                                    <td t-field="offer.date_deadline"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p t-else="">No offers registered.</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

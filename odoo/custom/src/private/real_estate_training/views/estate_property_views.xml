@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_property_form_training" model="ir.ui.view">
+        <field name="name">estate.property.form.training</field>
+        <field name="model">estate.property</field>
+        <field name="inherit_id" ref="real_estate.estate_property_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_training_assign_salesman" type="object" string="Assign salesperson"
+                    groups="real_estate.group_estate_property_manager"/>
+                <button name="action_training_mailhog" type="object" string="MailHog test"
+                    groups="real_estate.group_estate_property_manager"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

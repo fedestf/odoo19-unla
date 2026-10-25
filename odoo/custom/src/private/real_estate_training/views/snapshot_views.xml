@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_training_snapshot_list" model="ir.ui.view">
+        <field name="name">estate.training.snapshot.list</field>
+        <field name="model">estate.training.snapshot</field>
+        <field name="arch" type="xml">
+            <list string="Daily snapshots" create="false" edit="false">
+                <header>
+                    <button name="action_capture_today" type="object" string="Capture today" display="always"/>
+                </header>
+                <field name="capture_date"/>
+                <field name="property_count"/>
+                <field name="available_count"/>
+                <field name="offer_count"/>
+                <field name="pending_offer_count"/>
+                <field name="generated_at"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_training_snapshot_form" model="ir.ui.view">
+        <field name="name">estate.training.snapshot.form</field>
+        <field name="model">estate.training.snapshot</field>
+        <field name="arch" type="xml">
+            <form string="Daily snapshot" create="false" edit="false">
+                <sheet>
+                    <group>
+                        <field name="capture_date"/>
+                        <field name="generated_at"/>
+                        <field name="property_count"/>
+                        <field name="available_count"/>
+                        <field name="offer_count"/>
+                        <field name="pending_offer_count"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_training_snapshots" model="ir.actions.act_window">
+        <field name="name">Daily snapshots</field>
+        <field name="res_model">estate.training.snapshot</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="menu_training_snapshots" name="Daily snapshots"
+        parent="real_estate.real_estate_menu_settings" action="action_training_snapshots"
+        sequence="40" groups="real_estate.group_estate_property_manager"/>
+</odoo>

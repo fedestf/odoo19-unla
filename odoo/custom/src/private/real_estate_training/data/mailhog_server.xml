@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="mailhog_training_server" model="ir.mail_server">
+        <field name="name">Unit 3 - Local MailHog</field>
+        <field name="smtp_host">smtp</field>
+        <field name="smtp_port">1025</field>
+        <field name="smtp_encryption">none</field>
+        <field name="smtp_authentication">login</field>
+        <field name="from_filter">training@localhost.test</field>
+        <field name="sequence">999</field>
+    </record>
+</odoo>
