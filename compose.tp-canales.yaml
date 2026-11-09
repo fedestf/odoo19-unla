@@ -1,0 +1,10 @@
+# Use with: docker compose -f devel.yaml -f compose.tp-canales.yaml ...
+# The existing PostgreSQL volume and its devel database are preserved.
+services:
+  odoo:
+    environment:
+      PGDATABASE: tp_canales
+      DB_FILTER: '^tp_canales$'
+  pgweb:
+    environment:
+      PGWEB_DATABASE_URL: postgres://odoo:odoopassword@db:5432/tp_canales?sslmode=disable

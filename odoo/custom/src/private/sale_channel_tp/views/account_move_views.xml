@@ -1,0 +1,33 @@
+<odoo>
+    <record id="invoice_channel_form" model="ir.ui.view">
+        <field name="name">account.move.channel.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_origin']" position="after">
+                <field name="sale_channel_id" invisible="move_type not in ['out_invoice', 'out_refund']"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="invoice_channel_list" model="ir.ui.view">
+        <field name="name">account.move.channel.list</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list/field[@name='name']" position="after">
+                <field name="sale_channel_id" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="invoice_channel_search" model="ir.ui.view">
+        <field name="name">account.move.channel.search</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <field name="sale_channel_id"/>
+                <filter name="group_by_sale_channel_tp" string="Canal de venta" context="{'group_by': 'sale_channel_id'}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

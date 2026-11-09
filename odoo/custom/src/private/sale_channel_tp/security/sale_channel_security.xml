@@ -1,0 +1,7 @@
+<odoo>
+    <record id="sale_channel_company_rule" model="ir.rule">
+        <field name="name">Canales de las compañías habilitadas</field>
+        <field name="model_id" ref="model_sale_channel_tp"/>
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>

@@ -1,0 +1,56 @@
+<odoo>
+    <record id="sale_channel_list" model="ir.ui.view">
+        <field name="name">sale.channel.tp.list</field>
+        <field name="model">sale.channel.tp</field>
+        <field name="arch" type="xml">
+            <list string="Canales de venta">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="warehouse_id"/>
+                <field name="journal_id"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+    <record id="sale_channel_form" model="ir.ui.view">
+        <field name="name">sale.channel.tp.form</field>
+        <field name="model">sale.channel.tp</field>
+        <field name="arch" type="xml">
+            <form string="Canal de venta">
+                <sheet>
+                    <field name="company_id" invisible="1"/>
+                    <widget name="web_ribbon" title="Archivado" bg_color="text-bg-danger" invisible="active"/>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="active" invisible="1"/>
+                        <field name="company_id" groups="base.group_multi_company"/>
+                        <field name="warehouse_id" options="{'no_create': True}"/>
+                        <field name="journal_id" options="{'no_create': True}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="sale_channel_search" model="ir.ui.view">
+        <field name="name">sale.channel.tp.search</field>
+        <field name="model">sale.channel.tp</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="warehouse_id"/>
+                <filter name="archived" string="Archivados" domain="[('active', '=', False)]"/>
+                <filter name="by_warehouse" string="Depósito" context="{'group_by': 'warehouse_id'}"/>
+            </search>
+        </field>
+    </record>
+    <record id="sale_channel_action" model="ir.actions.act_window">
+        <field name="name">Canales de venta</field>
+        <field name="res_model">sale.channel.tp</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="sale_channel_search"/>
+    </record>
+    <menuitem id="sale_channel_menu" name="Canales de venta" parent="sale.menu_sale_config"
+              action="sale_channel_action" sequence="25" groups="sales_team.group_sale_manager"/>
+</odoo>
