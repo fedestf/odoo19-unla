@@ -1,6 +1,6 @@
 # TP de Programación en Odoo - Parte 1
 
-Estado: parte 1 implementada para Odoo 19 Community. 33 pruebas locales ejecutadas y correctas (21 del módulo y 12 de preparación automática); 17 pruebas de integración preparadas. Instalación y pruebas dentro de Odoo pendientes para cuando se retomen las validaciones.
+Estado: parte 1 implementada para Odoo 19 Community. 33 pruebas locales correctas (21 del módulo y 12 de preparación automática), más 22 pruebas de integración ejecutadas correctamente con Odoo OCB 19 y PostgreSQL reales el 9 de noviembre de 2026. Las siete comprobaciones pendientes de filtros, agrupación y bloqueos están cubiertas por esta ejecución. Ver `docs/tp-canales-pruebas-integracion.md` para el entorno, alcance y evidencia. La revisión visual en la VM sigue siendo distinta de estas pruebas del servidor.
 
 Consigna: documento UNLa, Lic. en Sistemas, «Trabajo Práctico - Parte 1/2», versión 20251021. La parte 2 todavía no fue proporcionada. La introducción menciona crédito, pero esta entrega no define grupos, cálculo de saldo ni reglas de consumo/liberación; no se inventaron esas reglas.
 
@@ -78,7 +78,7 @@ La carga conserva identificadores de sus ejemplos para reutilizarlos en siguient
 
 Los registros de muestra se identifican con XML IDs del espacio `tp_canales_fixture`, independiente de los datos instalados por el módulo. No son la localización fiscal argentina ni sirven para facturación real; el TP exige el flujo y los vínculos, no trámites fiscales.
 
-El preparador comprueba que los ejemplos creados tienen el canal, depósito y diario esperados. No ejecuta los 17 tests ORM ni reemplaza la revisión de permisos y pantallas. La carga exige el nombre de base exacto `tp_canales` y rechaza cualquier otra, incluida `devel`.
+El preparador comprueba que los ejemplos creados tienen el canal, depósito y diario esperados. No ejecuta los 22 tests ORM ni reemplaza la revisión de permisos y pantallas. La carga exige el nombre de base exacto `tp_canales` y rechaza cualquier otra, incluida `devel`.
 
 ### Alternativa: instalación y carga manual
 
@@ -134,7 +134,7 @@ Resultado de desarrollo: 33 pruebas correctas. Las primeras 21 ejecutan métodos
 
 Además se verificaron estáticamente 11 expresiones XPath contra los archivos oficiales de vistas de Odoo 19. Esto comprueba los puntos de inserción, no sustituye la compilación de vistas de la instalación OCB concreta.
 
-Hay 17 casos de integración en `sale_channel_tp/tests/test_sale_channel.py`, pendientes de ejecutar: código único, campos vacíos, diario y compañía incorrectos, canal obligatorio, cambio desde formulario, recomputación, depósito incoherente, protección de configuración, entrega real con almacén/canal, bloqueo de canal confirmado/archivado, factura con diario/canal, separación o agrupación de facturas, ACL de vendedor y agrupación en los tres modelos.
+Hay 22 casos de integración en `sale_channel_tp/tests/test_sale_channel.py`, ejecutados correctamente en el entorno local aislado: código único, campos vacíos, diario y compañía incorrectos, canal obligatorio, cambio desde formulario, recomputación, depósito incoherente, protección de configuración, entrega real con almacén/canal, bloqueo de canal confirmado/archivado, factura con diario/canal, separación o agrupación de facturas, ACL de vendedor y agrupación en los tres modelos. Se agregaron casos explícitos para agrupar entregas y facturas y filtrar pedidos, entregas y facturas por canal.
 
 Para ejecutarlos por primera vez, usar una base de pruebas nueva, no `devel` ni `tp_canales`:
 

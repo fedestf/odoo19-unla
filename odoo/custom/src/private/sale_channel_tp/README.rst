@@ -1,5 +1,5 @@
 TP - Canales de venta (Parte 1)
-==============================
+===============================
 
 Módulo para Odoo 19 Community que permite configurar canales con depósito y
 diario de ventas. Los pedidos requieren un canal, usan su almacén y diario y lo

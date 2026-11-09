@@ -11,6 +11,12 @@ class TestSaleChannel(AccountTestInvoicingCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        # Account's shared fixture does not grant Sales Administrator.
+        # Add the business roles needed by this suite; keep tests outside sudo.
+        cls.env.user.sudo().write({'group_ids': [
+            Command.link(cls.env.ref('sales_team.group_sale_manager').id),
+            Command.link(cls.env.ref('stock.group_stock_manager').id),
+        ]})
         cls.warehouse = cls.env['stock.warehouse'].search([
             ('company_id', '=', cls.env.company.id),
         ], limit=1)
@@ -41,7 +47,7 @@ class TestSaleChannel(AccountTestInvoicingCommon):
 
     def test_normalization_and_unique_code(self):
         self.assertEqual(self.channel.code, 'TP-PRES')
-        with self.assertRaises(ValidationError), self.cr.savepoint():
+        with self.assertRaises(IntegrityError), self.cr.savepoint():
             self.channel_b.code = ' tp-pres '
 
     def test_blank_code(self):
@@ -62,7 +68,7 @@ class TestSaleChannel(AccountTestInvoicingCommon):
             self.channel_b.warehouse_id = warehouse
 
     def test_channel_required(self):
-        with self.assertRaises((ValidationError, UserError, IntegrityError)), self.cr.savepoint():
+        with self.assertRaises(IntegrityError), self.cr.savepoint():
             self.env['sale.order'].create({'partner_id': self.partner_a.id})
 
     def test_compute_and_change_channel(self):
@@ -88,8 +94,9 @@ class TestSaleChannel(AccountTestInvoicingCommon):
 
     def test_configuration_cannot_change_after_use(self):
         self.make_order()
-        with self.assertRaises(UserError), self.cr.savepoint():
-            self.channel.journal_id = self.journal_b
+        for values in ({'journal_id': self.journal_b.id}, {'warehouse_id': self.warehouse_b.id}):
+            with self.subTest(values=values), self.assertRaises(UserError), self.cr.savepoint():
+                self.channel.write(values)
 
     def test_confirm_creates_delivery_with_channel_and_warehouse(self):
         order = self.make_order(self.channel_b)
@@ -154,3 +161,48 @@ class TestSaleChannel(AccountTestInvoicingCommon):
                 [('id', 'in', records.ids)], ['sale_channel_id'], ['__count'],
             )
             self.assertEqual(groups[0][0], self.channel)
+
+    def _two_channel_documents(self):
+        orders = self.make_order() | self.make_order(self.channel_b)
+        orders.action_confirm()
+        invoices = orders._create_invoices(grouped=False)
+        return orders, orders.picking_ids, invoices
+
+    def test_group_deliveries_by_channel(self):
+        _, deliveries, _ = self._two_channel_documents()
+        groups = self.env['stock.picking']._read_group(
+            [('id', 'in', deliveries.ids)], ['sale_channel_id'], ['__count'],
+        )
+        self.assertEqual({channel.id: count for channel, count in groups}, {
+            self.channel.id: 1, self.channel_b.id: 1,
+        })
+
+    def test_group_invoices_by_channel(self):
+        _, _, invoices = self._two_channel_documents()
+        groups = self.env['account.move']._read_group(
+            [('id', 'in', invoices.ids)], ['sale_channel_id'], ['__count'],
+        )
+        self.assertEqual({channel.id: count for channel, count in groups}, {
+            self.channel.id: 1, self.channel_b.id: 1,
+        })
+
+    def _assert_channel_filters(self, records):
+        for channel in (self.channel, self.channel_b):
+            result = self.env[records._name].search([
+                ('id', 'in', records.ids), ('sale_channel_id', '=', channel.id),
+            ])
+            self.assertEqual(len(result), 1)
+            self.assertEqual(result.sale_channel_id, channel)
+        self.assertEqual(len(records), 2)
+
+    def test_filter_orders_by_channel(self):
+        orders, _, _ = self._two_channel_documents()
+        self._assert_channel_filters(orders)
+
+    def test_filter_deliveries_by_channel(self):
+        _, deliveries, _ = self._two_channel_documents()
+        self._assert_channel_filters(deliveries)
+
+    def test_filter_invoices_by_channel(self):
+        _, _, invoices = self._two_channel_documents()
+        self._assert_channel_filters(invoices)
