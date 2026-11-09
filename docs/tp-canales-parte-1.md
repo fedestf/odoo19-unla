@@ -1,6 +1,6 @@
 # TP de Programación en Odoo - Parte 1
 
-Estado: parte 1 implementada para Odoo 19 Community. 21 pruebas locales ejecutadas y correctas; 17 pruebas de integración preparadas. Instalación y pruebas dentro de Odoo pendientes para cuando se retomen las validaciones.
+Estado: parte 1 implementada para Odoo 19 Community. 33 pruebas locales ejecutadas y correctas (21 del módulo y 12 de preparación automática); 17 pruebas de integración preparadas. Instalación y pruebas dentro de Odoo pendientes para cuando se retomen las validaciones.
 
 Consigna: documento UNLa, Lic. en Sistemas, «Trabajo Práctico - Parte 1/2», versión 20251021. La parte 2 todavía no fue proporcionada. La introducción menciona crédito, pero esta entrega no define grupos, cálculo de saldo ni reglas de consumo/liberación; no se inventaron esas reglas.
 
@@ -38,7 +38,7 @@ El archivo `compose.tp-canales.yaml` se combina con `devel.yaml`: selecciona `tp
 - La facturación conjunta agrupa por canal y diario además de las claves estándar. Dos canales diferentes no se mezclan en una factura, aunque tengan el mismo cliente y diario. Pedidos compatibles del mismo canal pueden agruparse.
 - Las facturas manuales y transferencias ajenas a pedidos no están obligadas a tener canal. Las facturas de pedido lo reciben automáticamente. No se publican ni envían facturas automáticamente.
 - Las rutas logísticas siguen siendo las de Odoo. La comprobación prevista utiliza productos físicos y el flujo estándar desde el almacén del canal; no se configuraron dropshipping, rutas alternativas ni abastecimiento externo al almacén.
-- No se insertan canales, ventas ni facturas de prueba en la base de trabajo. Los casos automatizados de integración generan sus propios datos en una base separada.
+- Instalar el módulo solo no inserta canales, ventas ni facturas de prueba. La preparación automática opcional carga ejemplos únicamente en `tp_canales`; las pruebas de integración generan sus propios datos en otra base separada.
 
 ## Permisos
 
@@ -49,6 +49,38 @@ Una regla global limita los canales a las compañías habilitadas del usuario. L
 ## Instalación en la VM, cuando se decida utilizar el TP
 
 Estos comandos están preparados; no fueron ejecutados desde este chat. No requieren borrar ninguna base ni usar `invoke resetdb`.
+
+### Opción recomendada: preparación automática
+
+Desde una terminal de Ubuntu:
+
+```bash
+cd ~/odoo19
+git pull --ff-only
+python3 scripts/preparar_tp_canales.py
+```
+
+El preparador comprueba PostgreSQL, detecta si corresponde instalar o actualizar el módulo, carga los ejemplos y arranca Odoo. No requiere instalar bibliotecas Python en Ubuntu.
+
+Deja preparados:
+
+- Plan contable genérico de práctica si la compañía no tiene uno. Si ya tiene un plan contable, lo conserva. Si encuentra cuentas existentes sin un plan reconocido, se detiene para no reemplazarlas.
+- Dos depósitos `Depósito Local TP` y `Depósito Web TP`, códigos `TPL` y `TPW`.
+- Dos diarios de ventas, `Ventas Local TP` y `Ventas Web TP`.
+- Canales `Local TP` y `Web TP`, códigos `TP-LOCAL` y `TP-WEB`.
+- Cliente `Cliente prueba TP` y producto `Producto prueba TP`, precio 100, sin impuestos en los ejemplos, facturable por cantidades pedidas. Es un bien físico sin seguimiento de existencias, por lo que no exige ajustar stock para revisar las entregas.
+- Usuario `tp_canales`, con permisos de Ventas, Inventario y Contabilidad, acceso a varios almacenes y una contraseña aleatoria que se muestra una sola vez en la terminal. Guardarla para ingresar; no se guarda en el repositorio ni se cambia al repetir la carga.
+- Dos presupuestos editables para practicar cambios de canal, más dos pedidos confirmados (uno por canal), sus entregas pendientes y sus facturas nuevas en borrador. Cada ejemplo contiene dos unidades a 100.
+
+Al terminar, abrir `http://localhost:19069/web/login?db=tp_canales` e ingresar como `tp_canales` con la contraseña mostrada. En Ventas se pueden distinguir los documentos por la referencia de cliente: `TP-PRESUPUESTO-LOCAL`, `TP-PRESUPUESTO-WEB`, `TP-EJEMPLO-LOCAL` y `TP-EJEMPLO-WEB`.
+
+La carga conserva identificadores de sus ejemplos para reutilizarlos en siguientes ejecuciones. No borra registros ni reemplaza documentos modificados: si una configuración de práctica es incompatible, se detiene con el motivo. Si ya se publicaron las facturas de ejemplo o completaron sus entregas, no las vuelve a borrador ni deshace lo realizado. Las nuevas facturas se crean en borrador y las entregas nuevas quedan sin validar. El cliente y usuario nuevos no tienen correo y la confirmación se ejecuta sin envío de correo comercial.
+
+Los registros de muestra se identifican con XML IDs del espacio `tp_canales_fixture`, independiente de los datos instalados por el módulo. No son la localización fiscal argentina ni sirven para facturación real; el TP exige el flujo y los vínculos, no trámites fiscales.
+
+El preparador comprueba que los ejemplos creados tienen el canal, depósito y diario esperados. No ejecuta los 17 tests ORM ni reemplaza la revisión de permisos y pantallas. La carga exige el nombre de base exacto `tp_canales` y rechaza cualquier otra, incluida `devel`.
+
+### Alternativa: instalación y carga manual
 
 Primera instalación, utilizando una base nueva llamada `tp_canales`:
 
@@ -98,7 +130,7 @@ Pruebas locales, sin servidor Odoo y sin dependencias externas:
 python3 -m unittest discover -s tests_tp_canales -v
 ```
 
-Resultado de desarrollo: 21 pruebas correctas. Ejecutan métodos reales extraídos del módulo con sustitutos mínimos del ORM y revisan sintaxis Python/XML, manifiesto, ACL, regla de compañías y filtros. No demuestran instalación, recomputación real del ORM, permisos reales ni generación de documentos.
+Resultado de desarrollo: 33 pruebas correctas. Las primeras 21 ejecutan métodos reales extraídos del módulo con sustitutos mínimos del ORM y revisan sintaxis Python/XML, manifiesto, ACL, regla de compañías y filtros. Otras 12 verifican el preparador con Docker simulado: elección de instalación/actualización, interrupción ante errores, destino de base restringido, reutilización de identificadores, rechazo de configuraciones modificadas y sintaxis. No demuestran instalación, recomputación real del ORM, permisos reales ni generación de documentos.
 
 Además se verificaron estáticamente 11 expresiones XPath contra los archivos oficiales de vistas de Odoo 19. Esto comprueba los puntos de inserción, no sustituye la compilación de vistas de la instalación OCB concreta.
 
